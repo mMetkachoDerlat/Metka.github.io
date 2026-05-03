@@ -51,8 +51,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .cards.dov{background:var(--surface);border-color:var(--accent2);}
 .add-btn{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:7px;border:1px dashed var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-size:12px;font-family:inherit;transition:all var(--tr);width:100%;margin-top:4px;}
 .add-btn:hover{border-color:var(--accent2);color:var(--accent);background:var(--accent3);}
-
-/* CARD */
 .card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:13px;cursor:grab;transition:all var(--tr);position:relative;user-select:none;animation:cIn .22s ease;}
 @keyframes cIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
 .card:hover{border-color:var(--accent2);transform:translateY(-1px);box-shadow:0 4px 18px rgba(0,0,0,.35);}
@@ -67,7 +65,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .card-desc{font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:9px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 .card-img{width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:9px;display:block;}
 .prog-wrap{margin-bottom:8px;}
-.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px;letter-spacing:.04em;}
+.prog-lbl{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-bottom:4px;}
 .prog-pct{font-size:11px;font-weight:500;color:var(--accent);font-family:'Cormorant Garamond',serif;}
 .prog-track{height:3px;background:var(--border2);border-radius:2px;overflow:hidden;}
 .prog-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px;transition:width .4s ease;}
@@ -99,8 +97,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .nab{width:22px;height:22px;border-radius:5px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;background:rgba(0,0,0,.5);color:var(--text2);transition:all var(--tr);}
 .nab:hover{background:var(--accent);color:#0c0b09;}
 .nab.del:hover{background:var(--red);color:var(--text);}
-
-/* CONTEXT MENU */
 .ctx{position:fixed;background:var(--bg2);border:1px solid var(--border2);border-radius:9px;padding:5px;z-index:500;min-width:175px;box-shadow:0 8px 32px rgba(0,0,0,.6);animation:ctxIn .12s ease;}
 @keyframes ctxIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
 .ctx-item{display:flex;align-items:center;gap:9px;padding:9px 13px;border-radius:6px;font-size:12px;color:var(--text2);cursor:pointer;transition:all var(--tr);}
@@ -110,30 +106,30 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 
 /* ══ МУЗЫКА ══ */
 #pane-music{flex-direction:row;}
-.ml-panel{width:360px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);}
-.ml-add{padding:20px 18px 12px;}
+.ml-panel{width:340px;flex-shrink:0;border-right:1px solid var(--border);display:flex;flex-direction:column;background:var(--bg2);}
+.ml-add{padding:18px 16px 10px;}
 .ml-row{display:flex;gap:8px;}
 .ml-inp{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:7px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 14px;outline:none;transition:border-color var(--tr);}
 .ml-inp:focus{border-color:var(--accent2);}
 .ml-inp::placeholder{color:var(--text3);}
-.ml-modes{display:flex;gap:5px;padding:0 18px 12px;align-items:center;flex-wrap:wrap;}
-.mbtn{font-size:10px;padding:5px 11px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr);letter-spacing:.06em;}
+.ml-modes{display:flex;gap:4px;padding:0 16px 10px;align-items:center;flex-wrap:wrap;}
+.mbtn{font-size:10px;padding:5px 10px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;transition:all var(--tr);letter-spacing:.06em;}
 .mbtn:hover{border-color:var(--border3);color:var(--text2);}
 .mbtn.act{background:var(--accent);color:#0c0b09;border-color:var(--accent);}
-.ml-lbl{font-size:10px;color:var(--text3);margin-right:3px;}
-.tlist{flex:1;overflow-y:auto;padding:0 10px 10px;}
-.ti{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:all var(--tr);}
+.ml-lbl{font-size:10px;color:var(--text3);margin-right:2px;}
+.tlist{flex:1;overflow-y:auto;padding:0 8px 10px;}
+.ti{display:flex;align-items:center;gap:7px;padding:8px 9px;border-radius:8px;border:1px solid transparent;cursor:pointer;transition:all var(--tr);}
 .ti:hover{background:var(--surface);border-color:var(--border);}
 .ti.playing{background:var(--surface2);border-color:var(--accent2);}
 .ti.dover{border-color:var(--accent);background:var(--accent3);}
 .tcb{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0;}
 .tdrag{color:var(--text3);font-size:13px;cursor:grab;padding:0 2px;flex-shrink:0;}
-.tthumb{width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0;}
-.tph{width:36px;height:36px;border-radius:6px;background:var(--surface2);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:14px;flex-shrink:0;}
+.tthumb{width:34px;height:34px;border-radius:6px;object-fit:cover;flex-shrink:0;}
+.tph{width:34px;height:34px;border-radius:6px;background:var(--surface2);display:flex;align-items:center;justify-content:center;color:var(--text3);font-size:14px;flex-shrink:0;}
 .tinfo{flex:1;min-width:0;}
 .tname{font-size:12px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .tauth{font-size:10px;color:var(--text3);}
-.ttype{font-size:9px;padding:2px 6px;border-radius:4px;background:var(--surface2);color:var(--text3);margin-top:2px;display:inline-block;}
+.ttype{font-size:9px;padding:2px 5px;border-radius:4px;background:var(--surface2);color:var(--text3);margin-top:2px;display:inline-block;}
 .tdel{opacity:0;font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;padding:3px;border-radius:4px;transition:all var(--tr);flex-shrink:0;}
 .ti:hover .tdel{opacity:1;}
 .tdel:hover{color:#e07070;}
@@ -142,33 +138,69 @@ header{display:flex;align-items:center;justify-content:space-between;padding:12p
 .pbar:nth-child(2){animation-delay:.2s;}.pbar:nth-child(3){animation-delay:.4s;}
 @keyframes pb{from{height:4px}to{height:14px}}
 .tnum{font-size:10px;color:var(--text3);min-width:18px;text-align:right;flex-shrink:0;}
-.sc-panel{flex:1;display:flex;flex-direction:column;background:var(--bg);}
-.np-hdr{padding:24px 28px 16px;border-bottom:1px solid var(--border);}
-.np-lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:7px;}
-.np-title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;color:var(--text);line-height:1.25;margin-bottom:3px;}
-.np-auth{font-size:11px;color:var(--text3);}
-.np-badge{display:inline-block;font-size:10px;padding:2px 9px;border-radius:5px;background:var(--surface2);color:var(--text3);border:1px solid var(--border2);margin-top:7px;}
-.pc{display:flex;align-items:center;gap:10px;padding:13px 24px;border-bottom:1px solid var(--border);}
-.cbtn{width:34px;height:34px;border-radius:50%;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all var(--tr);}
+.emhint{text-align:center;padding:24px 18px;color:var(--text3);font-size:12px;font-style:italic;}
+
+/* ══ VISUALIZER PANEL ══ */
+.vis-panel{flex:1;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden;}
+
+/* Aurora background */
+.aurora{position:absolute;inset:0;z-index:0;overflow:hidden;}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0;transition:opacity 1s ease;}
+#abl1{width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,.18),transparent 70%);top:-100px;left:-100px;animation:drift1 12s ease-in-out infinite;}
+#abl2{width:400px;height:400px;background:radial-gradient(circle,rgba(100,80,170,.15),transparent 70%);bottom:-80px;right:-80px;animation:drift2 15s ease-in-out infinite;}
+#abl3{width:350px;height:350px;background:radial-gradient(circle,rgba(50,120,90,.12),transparent 70%);top:40%;left:30%;animation:drift3 18s ease-in-out infinite;}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,60px) scale(1.15)}66%{transform:translate(-40px,90px) scale(.9)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,-50px) scale(1.2)}}
+@keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(60px,-40px) scale(1.1)}70%{transform:translate(-50px,50px) scale(.85)}}
+.aurora.playing .aurora-blob{opacity:1;}
+
+/* Particles */
+#particles{position:absolute;inset:0;z-index:1;pointer-events:none;}
+
+/* Vinyl */
+.vis-center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:20px;}
+.vinyl-wrap{position:relative;width:220px;height:220px;margin-bottom:28px;}
+.vinyl{width:220px;height:220px;border-radius:50%;background:conic-gradient(#111 0deg, #1a1a1a 10deg,#0d0d0d 20deg,#1a1a1a 30deg,#111 40deg,#0d0d0d 50deg,#1a1a1a 60deg,#111 70deg,#0d0d0d 80deg,#1a1a1a 90deg,#111 100deg,#0d0d0d 110deg,#1a1a1a 120deg,#111 130deg,#0d0d0d 140deg,#1a1a1a 150deg,#111 160deg,#0d0d0d 170deg,#1a1a1a 180deg,#111 190deg,#0d0d0d 200deg,#1a1a1a 210deg,#111 220deg,#0d0d0d 230deg,#1a1a1a 240deg,#111 250deg,#0d0d0d 260deg,#1a1a1a 270deg,#111 280deg,#0d0d0d 290deg,#1a1a1a 300deg,#111 310deg,#0d0d0d 320deg,#1a1a1a 330deg,#111 340deg,#0d0d0d 350deg,#1a1a1a 360deg);
+  box-shadow:0 0 0 2px #2a2a2a,0 0 40px rgba(0,0,0,.7),0 0 80px rgba(201,169,110,0);
+  animation:none;position:relative;overflow:hidden;transition:box-shadow 1s ease;}
+.vinyl.spinning{animation:spin 3s linear infinite;box-shadow:0 0 0 2px #2a2a2a,0 0 40px rgba(0,0,0,.7),0 0 80px rgba(201,169,110,.25),0 0 120px rgba(201,169,110,.1);}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.vinyl-grooves{position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle at center,transparent 0,transparent 6px,rgba(255,255,255,.025) 7px,transparent 8px);}
+.vinyl-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#c9a96e,#8b6f42);display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 2px 12px rgba(0,0,0,.5);}
+.vinyl-hole{width:10px;height:10px;border-radius:50%;background:#0c0b09;position:absolute;}
+.vinyl-thumb{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;object-fit:cover;z-index:3;}
+.vinyl-needle{position:absolute;top:-8px;right:-28px;width:50px;height:120px;z-index:10;pointer-events:none;}
+.needle-arm{width:3px;height:100%;background:linear-gradient(to bottom,#888,#555);border-radius:2px;transform-origin:top center;transform:rotate(-22deg);position:relative;}
+.needle-tip{width:8px;height:8px;border-radius:50%;background:#c9a96e;position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);box-shadow:0 0 8px rgba(201,169,110,.5);}
+
+/* Waveform bars */
+.waveform{display:flex;align-items:flex-end;gap:3px;height:80px;margin-bottom:20px;}
+.wv-bar{width:5px;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--accent2),var(--accent));min-height:3px;transition:height .05s ease;}
+
+/* Track info */
+.vis-info{text-align:center;z-index:2;}
+.vis-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--text);line-height:1.2;margin-bottom:6px;letter-spacing:.02em;}
+.vis-author{font-size:12px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
+
+/* Player controls (bottom bar) */
+.vis-controls{z-index:2;width:100%;padding:16px 32px 20px;border-top:1px solid var(--border);background:rgba(12,11,9,.6);backdrop-filter:blur(10px);display:flex;flex-direction:column;gap:10px;}
+.vc-row{display:flex;align-items:center;gap:12px;}
+.cbtn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:transparent;color:var(--text2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all var(--tr);flex-shrink:0;}
 .cbtn:hover{background:var(--surface);color:var(--text);border-color:var(--accent2);}
-.cbtn.pp{width:44px;height:44px;background:var(--accent);color:#0c0b09;border-color:var(--accent);font-size:17px;}
+.cbtn.pp{width:46px;height:46px;background:var(--accent);color:#0c0b09;border-color:var(--accent);font-size:18px;flex-shrink:0;}
 .cbtn.pp:hover{background:#d4b47e;}
 .psec{flex:1;}
-.pout{height:4px;background:var(--surface2);border-radius:2px;cursor:pointer;}
-.pin{height:4px;background:var(--accent);border-radius:2px;transition:width .12s linear;pointer-events:none;}
-.trow{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:5px;}
-/* Volume section */
-.vol-section{display:flex;align-items:center;gap:8px;min-width:140px;}
-.vol-icon{font-size:13px;color:var(--text3);flex-shrink:0;}
-.vol-slider{-webkit-appearance:none;appearance:none;width:90px;height:4px;border-radius:2px;background:var(--surface2);outline:none;cursor:pointer;}
-.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer;transition:transform var(--tr);}
-.vol-slider::-webkit-slider-thumb:hover{transform:scale(1.3);}
-.vol-pct{font-size:10px;color:var(--text3);min-width:28px;text-align:right;letter-spacing:.04em;}
-.sc-section{flex:1;position:relative;overflow:hidden;}
-#sc-iframe{width:100%;height:100%;border:none;display:none;}
-.sc-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:10px;color:var(--text3);position:absolute;inset:0;}
-.sc-empty-icon{font-size:44px;opacity:.2;}.sc-empty-text{font-size:12px;opacity:.4;}
-.emhint{text-align:center;padding:24px 18px;color:var(--text3);font-size:12px;font-style:italic;}
+.pout{height:3px;background:var(--surface2);border-radius:2px;cursor:pointer;position:relative;}
+.pout:hover .pthumb{opacity:1;}
+.pin{height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:2px;pointer-events:none;}
+.pthumb{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--accent);transform:translate(-50%,-50%);opacity:0;transition:opacity var(--tr);pointer-events:none;}
+.trow{display:flex;justify-content:space-between;font-size:10px;color:var(--text3);margin-top:6px;}
+.vol-section{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.vol-icon{font-size:14px;color:var(--text3);}
+.vol-slider{-webkit-appearance:none;width:80px;height:3px;border-radius:2px;background:var(--surface2);outline:none;cursor:pointer;}
+.vol-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--accent);cursor:pointer;}
+.vol-pct{font-size:10px;color:var(--text3);min-width:26px;}
+.np-badge{display:inline-block;font-size:10px;padding:2px 9px;border-radius:5px;background:rgba(255,245,220,.06);color:var(--text3);border:1px solid var(--border2);margin-bottom:6px;}
 
 /* MODAL */
 .overlay{display:none;position:fixed;inset:0;background:rgba(12,11,9,.9);z-index:400;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
@@ -218,9 +250,7 @@ select option{background:var(--bg2);}
     <button class="tab" onclick="switchTab('board')">⬡ Доска</button>
     <button class="tab" onclick="switchTab('music')">♫ Музыка</button>
   </div>
-  <div class="hdr-r" id="hdr-kanban">
-    <button class="btn pri" onclick="openCardModal()">+ Карточка</button>
-  </div>
+  <div class="hdr-r" id="hdr-kanban"><button class="btn pri" onclick="openCardModal()">+ Карточка</button></div>
   <div class="hdr-r" id="hdr-board" style="display:none">
     <button class="btn ic" onclick="bZoomOut()">－</button>
     <button class="btn ic" onclick="bZoomIn()">＋</button>
@@ -228,9 +258,7 @@ select option{background:var(--bg2);}
     <button class="btn act" id="connBtn" onclick="toggleConn()">⟶ Связи</button>
     <button class="btn pri" onclick="openNodeModal()">+ Цель</button>
   </div>
-  <div class="hdr-r" id="hdr-music" style="display:none">
-    <span style="font-size:11px;color:var(--text3)">Вставь ссылку SoundCloud слева</span>
-  </div>
+  <div class="hdr-r" id="hdr-music" style="display:none"><span style="font-size:11px;color:var(--text3)">Вставь ссылку SoundCloud слева</span></div>
 </header>
 
 <div class="content">
@@ -240,30 +268,18 @@ select option{background:var(--bg2);}
   <div class="kanban-body">
     <div class="kanban">
       <div class="col">
-        <div class="col-hdr todo">
-          <div class="col-ttl"><span style="color:#4a6090">▪</span> Хочу сделать <span class="col-badge" id="b-todo">0</span></div>
-        </div>
-        <div class="cards" id="c-todo" ondragover="kDragOver(event)" ondrop="kDrop(event,'todo')" ondragleave="kDragLeave(event)">
-          <div class="empty-col" id="e-todo">Пусто</div>
-        </div>
+        <div class="col-hdr todo"><div class="col-ttl"><span style="color:#4a6090">▪</span> Хочу сделать <span class="col-badge" id="b-todo">0</span></div></div>
+        <div class="cards" id="c-todo" ondragover="kDragOver(event)" ondrop="kDrop(event,'todo')" ondragleave="kDragLeave(event)"><div class="empty-col" id="e-todo">Пусто</div></div>
         <button class="add-btn" onclick="openCardModal('todo')"><span style="font-size:16px">+</span> Новая задача</button>
       </div>
       <div class="col">
-        <div class="col-hdr doing">
-          <div class="col-ttl"><span style="color:#8b6f42">▪</span> В процессе <span class="col-badge" id="b-doing">0</span></div>
-        </div>
-        <div class="cards" id="c-doing" ondragover="kDragOver(event)" ondrop="kDrop(event,'doing')" ondragleave="kDragLeave(event)">
-          <div class="empty-col" id="e-doing">Пусто</div>
-        </div>
+        <div class="col-hdr doing"><div class="col-ttl"><span style="color:#8b6f42">▪</span> В процессе <span class="col-badge" id="b-doing">0</span></div></div>
+        <div class="cards" id="c-doing" ondragover="kDragOver(event)" ondrop="kDrop(event,'doing')" ondragleave="kDragLeave(event)"><div class="empty-col" id="e-doing">Пусто</div></div>
         <button class="add-btn" onclick="openCardModal('doing')"><span style="font-size:16px">+</span> Новая задача</button>
       </div>
       <div class="col">
-        <div class="col-hdr done">
-          <div class="col-ttl"><span style="color:#2d6b45">▪</span> Готово <span class="col-badge" id="b-done">0</span></div>
-        </div>
-        <div class="cards" id="c-done" ondragover="kDragOver(event)" ondrop="kDrop(event,'done')" ondragleave="kDragLeave(event)">
-          <div class="empty-col" id="e-done">Пусто</div>
-        </div>
+        <div class="col-hdr done"><div class="col-ttl"><span style="color:#2d6b45">▪</span> Готово <span class="col-badge" id="b-done">0</span></div></div>
+        <div class="cards" id="c-done" ondragover="kDragOver(event)" ondrop="kDrop(event,'done')" ondragleave="kDragLeave(event)"><div class="empty-col" id="e-done">Пусто</div></div>
         <button class="add-btn" onclick="openCardModal('done')"><span style="font-size:16px">+</span> Новая задача</button>
       </div>
     </div>
@@ -274,18 +290,14 @@ select option{background:var(--bg2);}
 <div class="tab-pane" id="pane-board">
   <div style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
     <div class="board-tip">
-      <span>ПКМ на холсте — меню создания</span>
-      <span>ПКМ на ноде — редактировать / удалить</span>
-      <span>⟶ «Связи» — соединение нод</span>
-      <span>Тяни фон — перемещение · Колёсико — зум</span>
+      <span>ПКМ на холсте — создать цель</span><span>ПКМ на ноде — редактировать / удалить</span>
+      <span>⟶ «Связи» — соединение нод</span><span>Тяни фон — перемещение · Колёсико — зум</span>
     </div>
     <div class="bwrap" id="bwrap">
       <div id="bcanvas">
         <div class="dot-bg"></div>
         <svg id="esvg">
-          <defs>
-            <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#8b6f42"/></marker>
-          </defs>
+          <defs><marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#8b6f42"/></marker></defs>
           <line id="tmpline" x1="0" y1="0" x2="0" y2="0"/>
         </svg>
       </div>
@@ -295,9 +307,10 @@ select option{background:var(--bg2);}
 
 <!-- МУЗЫКА -->
 <div class="tab-pane" id="pane-music">
+  <!-- Track list -->
   <div class="ml-panel">
     <div class="ml-add">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:12px;">Плейлист</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;margin-bottom:11px;">Плейлист</div>
       <div class="ml-row">
         <input class="ml-inp" id="urlIn" type="text" placeholder="Ссылка SoundCloud..." onkeydown="if(event.key==='Enter')addUrl()"/>
         <button class="btn pri" onclick="addUrl()">+</button>
@@ -314,31 +327,65 @@ select option{background:var(--bg2);}
       <div class="emhint" id="tempty">Пусто — добавь ссылку SoundCloud</div>
     </div>
   </div>
-  <div class="sc-panel">
-    <div class="np-hdr">
-      <div class="np-lbl">● сейчас играет</div>
-      <div class="np-title" id="npT">—</div>
-      <div class="np-auth" id="npA">ожидание</div>
-      <span class="np-badge" id="npB" style="display:none"></span>
+
+  <!-- Visualizer -->
+  <div class="vis-panel" id="visPanel">
+    <div class="aurora" id="aurora">
+      <div class="aurora-blob" id="abl1"></div>
+      <div class="aurora-blob" id="abl2"></div>
+      <div class="aurora-blob" id="abl3"></div>
     </div>
-    <div class="pc">
-      <button class="cbtn" onclick="playPrev()">◀◀</button>
-      <button class="cbtn pp" id="ppBtn" onclick="togglePP()">▶</button>
-      <button class="cbtn" onclick="playNext()">▶▶</button>
-      <div class="psec">
-        <div class="pout" id="pout" onclick="seekTo(event)"><div class="pin" id="pin" style="width:0%"></div></div>
-        <div class="trow"><span id="tC">0:00</span><span id="tD">0:00</span></div>
+    <canvas id="particles"></canvas>
+
+    <div class="vis-center">
+      <!-- Vinyl -->
+      <div class="vinyl-wrap">
+        <div class="vinyl" id="vinyl">
+          <div class="vinyl-grooves"></div>
+          <div class="vinyl-label">
+            <div class="vinyl-hole"></div>
+          </div>
+          <img class="vinyl-thumb" id="vinylThumb" src="" style="display:none" alt="">
+        </div>
       </div>
-      <div class="vol-section">
-        <span class="vol-icon">♪</span>
-        <input type="range" class="vol-slider" id="vol" min="0" max="100" value="25" oninput="setVol(this.value)"/>
-        <span class="vol-pct" id="volPct">25%</span>
+
+      <!-- Waveform -->
+      <div class="waveform" id="waveform"></div>
+
+      <!-- Info -->
+      <div class="vis-info">
+        <span class="np-badge" id="npB" style="display:none"></span>
+        <div class="vis-title" id="npT">—</div>
+        <div class="vis-author" id="npA">ожидание</div>
       </div>
     </div>
-    <div class="sc-section">
-      <div class="sc-empty" id="scE"><div class="sc-empty-icon">♫</div><div class="sc-empty-text">Добавь треки и нажми ▶</div></div>
-      <iframe id="sc-iframe" src="about:blank" allow="autoplay" scrolling="no"></iframe>
+
+    <!-- Controls -->
+    <div class="vis-controls">
+      <div class="vc-row">
+        <div class="psec">
+          <div class="pout" id="pout" onclick="seekTo(event)">
+            <div class="pin" id="pin" style="width:0%"></div>
+            <div class="pthumb" id="pthumb" style="left:0%"></div>
+          </div>
+          <div class="trow"><span id="tC">0:00</span><span id="tD">0:00</span></div>
+        </div>
+      </div>
+      <div class="vc-row" style="justify-content:center;gap:16px;">
+        <div class="vol-section">
+          <span class="vol-icon">♪</span>
+          <input type="range" class="vol-slider" id="vol" min="0" max="100" value="25" oninput="setVol(this.value)"/>
+          <span class="vol-pct" id="volPct">25%</span>
+        </div>
+        <button class="cbtn" onclick="playPrev()">◀◀</button>
+        <button class="cbtn pp" id="ppBtn" onclick="togglePP()">▶</button>
+        <button class="cbtn" onclick="playNext()">▶▶</button>
+      </div>
     </div>
+
+    <!-- Hidden SC iframe -->
+    <iframe id="sc-iframe" src="about:blank" allow="autoplay" scrolling="no"
+      style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;bottom:0;left:0;"></iframe>
   </div>
 </div>
 
@@ -356,18 +403,10 @@ select option{background:var(--bg2);}
     <div class="fg"><label>Название</label><input type="text" id="cmTitle" placeholder="Что нужно сделать?"/></div>
     <div class="fg"><label>Описание</label><textarea id="cmDesc" placeholder="Подробнее..."></textarea></div>
     <div class="fg"><label>Колонка</label>
-      <select id="cmStatus">
-        <option value="todo">Хочу сделать</option>
-        <option value="doing">В процессе</option>
-        <option value="done">Готово</option>
-      </select>
+      <select id="cmStatus"><option value="todo">Хочу сделать</option><option value="doing">В процессе</option><option value="done">Готово</option></select>
     </div>
-    <div class="fg">
-      <label>Прогресс</label>
-      <div class="range-wrap">
-        <input type="range" id="cmProg" min="0" max="100" value="0" oninput="cmProgUpd(this.value)"/>
-        <span class="range-val" id="cmPVal">0%</span>
-      </div>
+    <div class="fg"><label>Прогресс</label>
+      <div class="range-wrap"><input type="range" id="cmProg" min="0" max="100" value="0" oninput="cmProgUpd(this.value)"/><span class="range-val" id="cmPVal">0%</span></div>
     </div>
     <div class="fg"><label>Теги</label>
       <div class="tag-row"><input type="text" id="cmTag" placeholder="Введи тег + Enter" onkeydown="if(event.key==='Enter'){event.preventDefault();addTag()}"/><button class="btn" onclick="addTag()">+</button></div>
@@ -396,10 +435,7 @@ select option{background:var(--bg2);}
     <div class="fg"><label>Название</label><input type="text" id="nmT" placeholder="Что хочешь сделать?"/></div>
     <div class="fg"><label>Описание</label><textarea id="nmN" placeholder="Подробнее..."></textarea></div>
     <div class="fg"><label>Тип</label>
-      <select id="nmTy">
-        <option value="goal">Цель</option><option value="task">Задача</option>
-        <option value="idea">Идея</option><option value="milestone">Веха</option><option value="block">Блокер</option>
-      </select>
+      <select id="nmTy"><option value="goal">Цель</option><option value="task">Задача</option><option value="idea">Идея</option><option value="milestone">Веха</option><option value="block">Блокер</option></select>
     </div>
     <div class="fg"><label>Цвет</label>
       <div class="cgrid">
@@ -421,138 +457,51 @@ select option{background:var(--bg2);}
 
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
-// ══ COLORS / TYPES ══
-const NCOL={
-  blue:{bg:'#1e2d45',brd:'#3a6090',bdg:'rgba(58,96,144,.4)'},
-  amber:{bg:'#2e2010',brd:'#8b6f42',bdg:'rgba(139,111,66,.4)'},
-  green:{bg:'#1a2e1f',brd:'#3a7055',bdg:'rgba(58,112,85,.4)'},
-  purple:{bg:'#221a38',brd:'#6655aa',bdg:'rgba(102,85,170,.4)'},
-  coral:{bg:'#2e1a1a',brd:'#904040',bdg:'rgba(144,64,64,.4)'},
-};
+// ══ COLORS ══
+const NCOL={blue:{bg:'#1e2d45',brd:'#3a6090',bdg:'rgba(58,96,144,.4)'},amber:{bg:'#2e2010',brd:'#8b6f42',bdg:'rgba(139,111,66,.4)'},green:{bg:'#1a2e1f',brd:'#3a7055',bdg:'rgba(58,112,85,.4)'},purple:{bg:'#221a38',brd:'#6655aa',bdg:'rgba(102,85,170,.4)'},coral:{bg:'#2e1a1a',brd:'#904040',bdg:'rgba(144,64,64,.4)'}};
 const TYPES={goal:'Цель',task:'Задача',idea:'Идея',milestone:'Веха',block:'Блокер'};
 
 // ══ STATE ══
-let cards=[],kIdC=1,kDragId=null;
-let cmTags=[],cmImage=null,cmEditId=null;
+let cards=[],kIdC=1,kDragId=null,cmTags=[],cmImage=null,cmEditId=null;
 let nodes=[],edges=[],bPan={x:400,y:300},bZoom=1,nIdC=1,eIdC=1;
-let connMode=false,cSrc=null;
-let bDragNode=null,bDragStart=null,bNodeStart=null;
-let bPanning=false,bPanStart=null;
+let connMode=false,cSrc=null,bDragNode=null,bDragStart=null,bNodeStart=null,bPanning=false,bPanStart=null;
 let nmEditId=null,nmCol='blue';
 let tracks=[],playMode='all',curIdx=-1,isPlaying=false,tIdC=1,dragTI=null;
 let widget=null,wReady=false;
-let currentTab='kanban';
-let lastMX=0,lastMY=0;
-let _pendingX=null,_pendingY=null;
+let currentTab='kanban',lastMX=0,lastMY=0,_pendingX=null,_pendingY=null;
 
-// ══ PERSIST ══
-function saveAll(){
-  try{
-    localStorage.setItem('k_cards',JSON.stringify(cards));localStorage.setItem('k_idc',kIdC);
-    localStorage.setItem('b_nodes',JSON.stringify(nodes));localStorage.setItem('b_edges',JSON.stringify(edges));
-    localStorage.setItem('b_pan',JSON.stringify(bPan));localStorage.setItem('b_zoom',bZoom);
-    localStorage.setItem('b_nidc',nIdC);localStorage.setItem('b_eidc',eIdC);
-    localStorage.setItem('m_tracks',JSON.stringify(tracks));localStorage.setItem('m_mode',playMode);
-    localStorage.setItem('m_cur',curIdx);localStorage.setItem('m_tidc',tIdC);
-  }catch(e){}
-}
-function loadAll(){
-  try{
-    cards=JSON.parse(localStorage.getItem('k_cards')||'[]');kIdC=parseInt(localStorage.getItem('k_idc')||'1');
-    nodes=JSON.parse(localStorage.getItem('b_nodes')||'[]');edges=JSON.parse(localStorage.getItem('b_edges')||'[]');
-    bPan=JSON.parse(localStorage.getItem('b_pan')||'{"x":400,"y":300}');bZoom=parseFloat(localStorage.getItem('b_zoom')||'1');
-    nIdC=parseInt(localStorage.getItem('b_nidc')||'1');eIdC=parseInt(localStorage.getItem('b_eidc')||'1');
-    tracks=JSON.parse(localStorage.getItem('m_tracks')||'[]');playMode=localStorage.getItem('m_mode')||'all';
-    curIdx=parseInt(localStorage.getItem('m_cur')||'-1');tIdC=parseInt(localStorage.getItem('m_tidc')||'1');
-  }catch(e){}
-}
+// Auto-switch polling
+let pollTimer=null,lastPos=0,lastDur=0,stuckCount=0,switchingTrack=false;
+
+// ══ PERSIST (same keys — data preserved) ══
+function saveAll(){try{localStorage.setItem('k_cards',JSON.stringify(cards));localStorage.setItem('k_idc',kIdC);localStorage.setItem('b_nodes',JSON.stringify(nodes));localStorage.setItem('b_edges',JSON.stringify(edges));localStorage.setItem('b_pan',JSON.stringify(bPan));localStorage.setItem('b_zoom',bZoom);localStorage.setItem('b_nidc',nIdC);localStorage.setItem('b_eidc',eIdC);localStorage.setItem('m_tracks',JSON.stringify(tracks));localStorage.setItem('m_mode',playMode);localStorage.setItem('m_cur',curIdx);localStorage.setItem('m_tidc',tIdC);}catch(e){}}
+function loadAll(){try{cards=JSON.parse(localStorage.getItem('k_cards')||'[]');kIdC=parseInt(localStorage.getItem('k_idc')||'1');nodes=JSON.parse(localStorage.getItem('b_nodes')||'[]');edges=JSON.parse(localStorage.getItem('b_edges')||'[]');bPan=JSON.parse(localStorage.getItem('b_pan')||'{"x":400,"y":300}');bZoom=parseFloat(localStorage.getItem('b_zoom')||'1');nIdC=parseInt(localStorage.getItem('b_nidc')||'1');eIdC=parseInt(localStorage.getItem('b_eidc')||'1');tracks=JSON.parse(localStorage.getItem('m_tracks')||'[]');playMode=localStorage.getItem('m_mode')||'all';curIdx=parseInt(localStorage.getItem('m_cur')||'-1');tIdC=parseInt(localStorage.getItem('m_tidc')||'1');}catch(e){}}
 
 // ══ TITLE ══
 function updateTitle(){
-  if(currentTab==='music'&&curIdx>=0&&tracks[curIdx]){
-    document.title='♫ '+(tracks[curIdx].title||'BOARD');
-  }else if(currentTab==='board'){
-    const top=[...cards].filter(c=>c.progress>0).sort((a,b)=>(b.progress||0)-(a.progress||0))[0];
-    document.title=top?top.progress+'% — '+top.title:'BOARD';
-  }else if(currentTab==='kanban'){
-    const doing=cards.filter(c=>c.status==='doing');
-    document.title=doing.length?'▶ '+doing[0].title:'BOARD';
-  }else{
-    document.title='BOARD';
-  }
+  if(currentTab==='music'&&curIdx>=0&&tracks[curIdx])document.title='♫ '+(tracks[curIdx].title||'BOARD');
+  else if(currentTab==='board'){const top=[...cards].filter(c=>c.progress>0).sort((a,b)=>(b.progress||0)-(a.progress||0))[0];document.title=top?top.progress+'% — '+top.title:'BOARD';}
+  else if(currentTab==='kanban'){const d=cards.filter(c=>c.status==='doing');document.title=d.length?'▶ '+d[0].title:'BOARD';}
+  else document.title='BOARD';
 }
 
 // ══ TABS ══
-function switchTab(t){
-  currentTab=t;
-  document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',['kanban','board','music'][i]===t));
-  document.querySelectorAll('.tab-pane').forEach(el=>el.classList.remove('active'));
-  document.getElementById('pane-'+t).classList.add('active');
-  ['kanban','board','music'].forEach(x=>document.getElementById('hdr-'+x).style.display=x===t?'flex':'none');
-  updateTitle();
-}
+function switchTab(t){currentTab=t;document.querySelectorAll('.tab').forEach((el,i)=>el.classList.toggle('active',['kanban','board','music'][i]===t));document.querySelectorAll('.tab-pane').forEach(el=>el.classList.remove('active'));document.getElementById('pane-'+t).classList.add('active');['kanban','board','music'].forEach(x=>document.getElementById('hdr-'+x).style.display=x===t?'flex':'none');updateTitle();}
 
 // ══ UTILS ══
 function eH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function showHint(m){const h=document.getElementById('hint');h.textContent=m;h.classList.add('show');}
 function hideHint(){document.getElementById('hint').classList.remove('show');}
-function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');}
+function showToast(m){document.getElementById('toast').textContent=m;document.getElementById('toast').classList.add('show');}
 function hideToast(){document.getElementById('toast').classList.remove('show');}
 
 // ══ KANBAN ══
-function renderKanban(){
-  ['todo','doing','done'].forEach(s=>{
-    const col=document.getElementById('c-'+s),empty=document.getElementById('e-'+s),badge=document.getElementById('b-'+s);
-    const sc=cards.filter(c=>c.status===s);
-    badge.textContent=sc.length;
-    col.querySelectorAll('.card').forEach(el=>el.remove());
-    empty.style.display=sc.length?'none':'block';
-    sc.forEach(card=>col.appendChild(makeCard(card)));
-  });
-  updateTitle();
-}
-function makeCard(card){
-  const el=document.createElement('div');
-  el.className='card';el.dataset.id=card.id;el.draggable=true;
-  el.addEventListener('dragstart',e=>{kDragId=card.id;el.classList.add('dragging');e.dataTransfer.effectAllowed='move';});
-  el.addEventListener('dragend',()=>{el.classList.remove('dragging');kDragId=null;});
-  el.addEventListener('click',e=>{if(e.target.closest('.cab'))return;openCardModal(card.status,card.id);});
-  let h=`<div class="card-top"><div class="card-title">${eH(card.title)}</div>
-    <div class="card-acts"><button class="cab del" onclick="deleteCardById(event,'${card.id}')">✕</button></div></div>`;
-  if(card.desc)h+=`<div class="card-desc">${eH(card.desc)}</div>`;
-  if(card.image)h+=`<img class="card-img" src="${card.image}">`;
-  const prog=card.progress||0;
-  h+=`<div class="prog-wrap">
-    <div class="prog-lbl"><span>Прогресс</span><span class="prog-pct">${prog}%</span></div>
-    <div class="prog-track"><div class="prog-fill" style="width:${prog}%"></div></div>
-  </div>`;
-  if(card.tags&&card.tags.length)h+=`<div class="card-tags">${card.tags.map(t=>`<span class="ctag">${eH(t)}</span>`).join('')}</div>`;
-  h+=`<div class="card-id">#${card.id}</div>`;
-  el.innerHTML=h;return el;
-}
+function renderKanban(){['todo','doing','done'].forEach(s=>{const col=document.getElementById('c-'+s),empty=document.getElementById('e-'+s),badge=document.getElementById('b-'+s);const sc=cards.filter(c=>c.status===s);badge.textContent=sc.length;col.querySelectorAll('.card').forEach(el=>el.remove());empty.style.display=sc.length?'none':'block';sc.forEach(card=>col.appendChild(makeCard(card)));});updateTitle();}
+function makeCard(card){const el=document.createElement('div');el.className='card';el.dataset.id=card.id;el.draggable=true;el.addEventListener('dragstart',e=>{kDragId=card.id;el.classList.add('dragging');e.dataTransfer.effectAllowed='move';});el.addEventListener('dragend',()=>{el.classList.remove('dragging');kDragId=null;});el.addEventListener('click',e=>{if(e.target.closest('.cab'))return;openCardModal(card.status,card.id);});const prog=card.progress||0;let h=`<div class="card-top"><div class="card-title">${eH(card.title)}</div><div class="card-acts"><button class="cab del" onclick="deleteCardById(event,'${card.id}')">✕</button></div></div>`;if(card.desc)h+=`<div class="card-desc">${eH(card.desc)}</div>`;if(card.image)h+=`<img class="card-img" src="${card.image}">`;h+=`<div class="prog-wrap"><div class="prog-lbl"><span>Прогресс</span><span class="prog-pct">${prog}%</span></div><div class="prog-track"><div class="prog-fill" style="width:${prog}%"></div></div></div>`;if(card.tags&&card.tags.length)h+=`<div class="card-tags">${card.tags.map(t=>`<span class="ctag">${eH(t)}</span>`).join('')}</div>`;h+=`<div class="card-id">#${card.id}</div>`;el.innerHTML=h;return el;}
 function kDragOver(e){e.preventDefault();e.currentTarget.classList.add('dov');e.dataTransfer.dropEffect='move';}
 function kDragLeave(e){e.currentTarget.classList.remove('dov');}
-function kDrop(e,status){e.preventDefault();e.currentTarget.classList.remove('dov');if(!kDragId)return;const c=cards.find(c=>c.id==kDragId);if(c){c.status=status;saveAll();renderKanban();}}
-
-// card modal
-function openCardModal(status='todo',id=null){
-  cmEditId=id;cmTags=[];cmImage=null;
-  const card=id?cards.find(c=>c.id==id):null;
-  document.getElementById('cmH').textContent=card?'Редактировать':'Новая карточка';
-  document.getElementById('cmTitle').value=card?card.title:'';
-  document.getElementById('cmDesc').value=card?card.desc||'':'';
-  document.getElementById('cmStatus').value=card?card.status:status;
-  const p=card?card.progress||0:0;
-  document.getElementById('cmProg').value=p;document.getElementById('cmPVal').textContent=p+'%';
-  document.getElementById('cmDel').style.display=card?'block':'none';
-  cmTags=card?[...(card.tags||[])]:[];cmImage=card?card.image||null:null;
-  renderTags();
-  const prev=document.getElementById('img-preview');
-  if(cmImage){prev.src=cmImage;prev.style.display='block';}else{prev.style.display='none';prev.src='';}
-  document.getElementById('cmImg').value='';
-  document.getElementById('cardModal').classList.add('open');
-  setTimeout(()=>document.getElementById('cmTitle').focus(),80);
-}
+function kDrop(e,s){e.preventDefault();e.currentTarget.classList.remove('dov');if(!kDragId)return;const c=cards.find(c=>c.id==kDragId);if(c){c.status=s;saveAll();renderKanban();}}
+function openCardModal(status='todo',id=null){cmEditId=id;cmTags=[];cmImage=null;const card=id?cards.find(c=>c.id==id):null;document.getElementById('cmH').textContent=card?'Редактировать':'Новая карточка';document.getElementById('cmTitle').value=card?card.title:'';document.getElementById('cmDesc').value=card?card.desc||'':'';document.getElementById('cmStatus').value=card?card.status:status;const p=card?card.progress||0:0;document.getElementById('cmProg').value=p;document.getElementById('cmPVal').textContent=p+'%';document.getElementById('cmDel').style.display=card?'block':'none';cmTags=card?[...(card.tags||[])]:[];cmImage=card?card.image||null:null;renderTags();const prev=document.getElementById('img-preview');if(cmImage){prev.src=cmImage;prev.style.display='block';}else{prev.style.display='none';prev.src='';}document.getElementById('cmImg').value='';document.getElementById('cardModal').classList.add('open');setTimeout(()=>document.getElementById('cmTitle').focus(),80);}
 function closeCardModal(){document.getElementById('cardModal').classList.remove('open');cmEditId=null;}
 function closeCardOut(e){if(e.target.id==='cardModal')closeCardModal();}
 function cmProgUpd(v){document.getElementById('cmPVal').textContent=v+'%';}
@@ -560,15 +509,7 @@ function addTag(){const inp=document.getElementById('cmTag');const v=inp.value.t
 function removeTag(t){cmTags=cmTags.filter(x=>x!==t);renderTags();}
 function renderTags(){document.getElementById('cur-tags').innerHTML=cmTags.map(t=>`<button class="tremove" onclick="removeTag('${eH(t)}')">${eH(t)} ✕</button>`).join('');}
 function handleImg(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{cmImage=ev.target.result;const p=document.getElementById('img-preview');p.src=cmImage;p.style.display='block';};r.readAsDataURL(f);}
-function saveCard(){
-  const title=document.getElementById('cmTitle').value.trim();
-  if(!title){document.getElementById('cmTitle').style.borderColor='#904040';return;}
-  document.getElementById('cmTitle').style.borderColor='';
-  const d={title,desc:document.getElementById('cmDesc').value.trim(),status:document.getElementById('cmStatus').value,progress:parseInt(document.getElementById('cmProg').value),tags:[...cmTags],image:cmImage};
-  if(cmEditId){const i=cards.findIndex(c=>c.id==cmEditId);if(i>=0)cards[i]={...cards[i],...d};}
-  else{d.id=String(kIdC++);cards.push(d);}
-  saveAll();renderKanban();closeCardModal();
-}
+function saveCard(){const title=document.getElementById('cmTitle').value.trim();if(!title){document.getElementById('cmTitle').style.borderColor='#904040';return;}document.getElementById('cmTitle').style.borderColor='';const d={title,desc:document.getElementById('cmDesc').value.trim(),status:document.getElementById('cmStatus').value,progress:parseInt(document.getElementById('cmProg').value),tags:[...cmTags],image:cmImage};if(cmEditId){const i=cards.findIndex(c=>c.id==cmEditId);if(i>=0)cards[i]={...cards[i],...d};}else{d.id=String(kIdC++);cards.push(d);}saveAll();renderKanban();closeCardModal();}
 function deleteCard(){if(!cmEditId)return;cards=cards.filter(c=>c.id!=cmEditId);saveAll();renderKanban();closeCardModal();}
 function deleteCardById(e,id){e.stopPropagation();cards=cards.filter(c=>c.id!=id);saveAll();renderKanban();}
 
@@ -578,147 +519,24 @@ function bZoomIn(){bZoom=Math.min(3,bZoom*1.15);bApply();saveAll();}
 function bZoomOut(){bZoom=Math.max(0.2,bZoom/1.15);bApply();saveAll();}
 function bReset(){bPan={x:400,y:300};bZoom=1;bApply();saveAll();}
 function s2c(x,y){const r=document.getElementById('bwrap').getBoundingClientRect();return{x:(x-r.left-bPan.x)/bZoom,y:(y-r.top-bPan.y)/bZoom};}
-
-function renderBoard(){
-  const canvas=document.getElementById('bcanvas');
-  const svg=document.getElementById('esvg');
-  canvas.querySelectorAll('.bnode').forEach(el=>el.remove());
-  svg.querySelectorAll('.eg').forEach(el=>el.remove());
-  edges.forEach(edge=>{
-    const fn=nodes.find(n=>n.id===edge.from),tn=nodes.find(n=>n.id===edge.to);if(!fn||!tn)return;
-    const fw=fn.w||190,fh=fn.h||80,tw=tn.w||190,th=tn.h||80;
-    const fx=fn.x+fw/2,fy=fn.y+fh/2,tx=tn.x+tw/2,ty=tn.y+th/2;
-    const mx=(fx+tx)/2-(ty-fy)*0.18,my=(fy+ty)/2+(tx-fx)*0.18;
-    const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.className.baseVal='eg';g.dataset.id=edge.id;
-    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d',`M ${fx} ${fy} Q ${mx} ${my} ${tx} ${ty}`);
-    p.setAttribute('class','ep');p.setAttribute('marker-end','url(#arr)');
-    p.style.pointerEvents='stroke';
-    p.addEventListener('click',()=>showCtxEdge(edge.id));
-    g.appendChild(p);
-    if(edge.lbl){const lx=(fx+mx+tx)/3,ly=(fy+my+ty)/3;const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',lx);t.setAttribute('y',ly);t.setAttribute('class','elbl');t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');t.textContent=edge.lbl;g.appendChild(t);}
-    svg.appendChild(g);
-  });
-  nodes.forEach(node=>{
-    const c=NCOL[node.color]||NCOL.blue;
-    const el=document.createElement('div');
-    el.className='bnode'+(cSrc===node.id?' csrc':'');
-    el.dataset.id=node.id;el.style.left=node.x+'px';el.style.top=node.y+'px';
-    el.style.background=c.bg;el.style.borderColor=c.brd;
-    let h=`<div class="nacts"><button class="nab" onclick="startConn(event,'${node.id}')">⟶</button><button class="nab" onclick="openNodeModal('${node.id}')">✎</button><button class="nab del" onclick="deleteNodeById(event,'${node.id}')">✕</button></div>`;
-    if(node.order)h+=`<div class="norder">${eH(node.order)}</div>`;
-    h+=`<div class="nbadge" style="background:${c.bdg};color:${c.brd}">${TYPES[node.type]||'Цель'}</div>`;
-    h+=`<div class="ntitle">${eH(node.title)}</div>`;
-    if(node.note)h+=`<div class="nnote">${eH(node.note)}</div>`;
-    el.innerHTML=h;
-    el.addEventListener('mousedown',e=>{
-      if(e.button!==0)return;if(e.target.closest('.nab'))return;
-      if(connMode&&cSrc&&cSrc!==node.id){handleConnTarget(node.id);return;}
-      if(connMode&&!cSrc){startConn(e,node.id);return;}
-      bDragNode=node;bDragStart={x:e.clientX,y:e.clientY};bNodeStart={x:node.x,y:node.y};
-      e.preventDefault();e.stopPropagation();
-    });
-    el.addEventListener('contextmenu',e=>{e.preventDefault();e.stopPropagation();showCtxNode(e.clientX,e.clientY,node.id);});
-    canvas.appendChild(el);
-    requestAnimationFrame(()=>{node.w=el.offsetWidth;node.h=el.offsetHeight;});
-  });
-}
-
-function redrawEdges(){
-  document.querySelectorAll('.eg').forEach(g=>g.remove());
-  const svg=document.getElementById('esvg');
-  edges.forEach(edge=>{
-    const fn=nodes.find(n=>n.id===edge.from),tn=nodes.find(n=>n.id===edge.to);if(!fn||!tn)return;
-    const fw=fn.w||190,fh=fn.h||80,tw=tn.w||190,th=tn.h||80;
-    const fx=fn.x+fw/2,fy=fn.y+fh/2,tx=tn.x+tw/2,ty=tn.y+th/2;
-    const mx=(fx+tx)/2-(ty-fy)*0.18,my=(fy+ty)/2+(tx-fx)*0.18;
-    const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.className.baseVal='eg';
-    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-    p.setAttribute('d',`M ${fx} ${fy} Q ${mx} ${my} ${tx} ${ty}`);p.setAttribute('class','ep');p.setAttribute('marker-end','url(#arr)');
-    g.appendChild(p);svg.appendChild(g);
-  });
-}
-
-// context menus
+function renderBoard(){const canvas=document.getElementById('bcanvas');const svg=document.getElementById('esvg');canvas.querySelectorAll('.bnode').forEach(el=>el.remove());svg.querySelectorAll('.eg').forEach(el=>el.remove());edges.forEach(edge=>{const fn=nodes.find(n=>n.id===edge.from),tn=nodes.find(n=>n.id===edge.to);if(!fn||!tn)return;const fw=fn.w||190,fh=fn.h||80,tw=tn.w||190,th=tn.h||80;const fx=fn.x+fw/2,fy=fn.y+fh/2,tx=tn.x+tw/2,ty=tn.y+th/2;const mx=(fx+tx)/2-(ty-fy)*0.18,my=(fy+ty)/2+(tx-fx)*0.18;const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.className.baseVal='eg';g.dataset.id=edge.id;const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',`M ${fx} ${fy} Q ${mx} ${my} ${tx} ${ty}`);p.setAttribute('class','ep');p.setAttribute('marker-end','url(#arr)');p.style.pointerEvents='stroke';p.addEventListener('click',()=>showCtxEdge(edge.id));g.appendChild(p);if(edge.lbl){const lx=(fx+mx+tx)/3,ly=(fy+my+ty)/3;const t=document.createElementNS('http://www.w3.org/2000/svg','text');t.setAttribute('x',lx);t.setAttribute('y',ly);t.setAttribute('class','elbl');t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');t.textContent=edge.lbl;g.appendChild(t);}svg.appendChild(g);});nodes.forEach(node=>{const c=NCOL[node.color]||NCOL.blue;const el=document.createElement('div');el.className='bnode'+(cSrc===node.id?' csrc':'');el.dataset.id=node.id;el.style.left=node.x+'px';el.style.top=node.y+'px';el.style.background=c.bg;el.style.borderColor=c.brd;let h=`<div class="nacts"><button class="nab" onclick="startConn(event,'${node.id}')">⟶</button><button class="nab" onclick="openNodeModal('${node.id}')">✎</button><button class="nab del" onclick="deleteNodeById(event,'${node.id}')">✕</button></div>`;if(node.order)h+=`<div class="norder">${eH(node.order)}</div>`;h+=`<div class="nbadge" style="background:${c.bdg};color:${c.brd}">${TYPES[node.type]||'Цель'}</div><div class="ntitle">${eH(node.title)}</div>`;if(node.note)h+=`<div class="nnote">${eH(node.note)}</div>`;el.innerHTML=h;el.addEventListener('mousedown',e=>{if(e.button!==0)return;if(e.target.closest('.nab'))return;if(connMode&&cSrc&&cSrc!==node.id){handleConnTarget(node.id);return;}if(connMode&&!cSrc){startConn(e,node.id);return;}bDragNode=node;bDragStart={x:e.clientX,y:e.clientY};bNodeStart={x:node.x,y:node.y};e.preventDefault();e.stopPropagation();});el.addEventListener('contextmenu',e=>{e.preventDefault();e.stopPropagation();showCtxNode(e.clientX,e.clientY,node.id);});canvas.appendChild(el);requestAnimationFrame(()=>{node.w=el.offsetWidth;node.h=el.offsetHeight;});});}
+function redrawEdges(){document.querySelectorAll('.eg').forEach(g=>g.remove());const svg=document.getElementById('esvg');edges.forEach(edge=>{const fn=nodes.find(n=>n.id===edge.from),tn=nodes.find(n=>n.id===edge.to);if(!fn||!tn)return;const fw=fn.w||190,fh=fn.h||80,tw=tn.w||190,th=tn.h||80;const fx=fn.x+fw/2,fy=fn.y+fh/2,tx=tn.x+tw/2,ty=tn.y+th/2;const mx=(fx+tx)/2-(ty-fy)*0.18,my=(fy+ty)/2+(tx-fx)*0.18;const g=document.createElementNS('http://www.w3.org/2000/svg','g');g.className.baseVal='eg';const p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d',`M ${fx} ${fy} Q ${mx} ${my} ${tx} ${ty}`);p.setAttribute('class','ep');p.setAttribute('marker-end','url(#arr)');g.appendChild(p);svg.appendChild(g);});}
 function hideCtx(){document.getElementById('ctx').style.display='none';}
-function posCtx(menu,cx,cy){
-  menu.style.display='block';menu.style.left=cx+'px';menu.style.top=cy+'px';
-  requestAnimationFrame(()=>{const r=menu.getBoundingClientRect();if(r.right>window.innerWidth)menu.style.left=(cx-r.width)+'px';if(r.bottom>window.innerHeight)menu.style.top=(cy-r.height)+'px';});
-}
-function showCtxCanvas(cx,cy,canvasX,canvasY){
-  const menu=document.getElementById('ctx');
-  menu.innerHTML=`
-    <div class="ctx-item" onclick="openNodeModalAt(${canvasX},${canvasY})">⬡ Создать цель</div>
-    <div class="ctx-sep"></div>
-    <div class="ctx-item" onclick="bReset()">⊡ Сбросить вид</div>
-    <div class="ctx-item" onclick="bZoomIn()">＋ Приблизить</div>
-    <div class="ctx-item" onclick="bZoomOut()">－ Отдалить</div>
-  `;posCtx(menu,cx,cy);
-}
-function showCtxNode(cx,cy,id){
-  const menu=document.getElementById('ctx');
-  menu.innerHTML=`
-    <div class="ctx-item" onclick="openNodeModal('${id}')">✎ Редактировать</div>
-    <div class="ctx-item" onclick="startConn(null,'${id}')">⟶ Соединить</div>
-    <div class="ctx-sep"></div>
-    <div class="ctx-item danger" onclick="deleteNodeById(null,'${id}')">✕ Удалить</div>
-  `;posCtx(menu,cx,cy);
-}
-function showCtxEdge(id){
-  const menu=document.getElementById('ctx');
-  menu.innerHTML=`<div class="ctx-item danger" onclick="deleteEdge('${id}')">✕ Удалить связь</div>`;
-  posCtx(menu,lastMX,lastMY);
-}
+function posCtx(menu,cx,cy){menu.style.display='block';menu.style.left=cx+'px';menu.style.top=cy+'px';requestAnimationFrame(()=>{const r=menu.getBoundingClientRect();if(r.right>window.innerWidth)menu.style.left=(cx-r.width)+'px';if(r.bottom>window.innerHeight)menu.style.top=(cy-r.height)+'px';});}
+function showCtxCanvas(cx,cy,canvasX,canvasY){const menu=document.getElementById('ctx');menu.innerHTML=`<div class="ctx-item" onclick="openNodeModalAt(${canvasX},${canvasY})">⬡ Создать цель</div><div class="ctx-sep"></div><div class="ctx-item" onclick="bReset()">⊡ Сбросить вид</div><div class="ctx-item" onclick="bZoomIn()">＋ Приблизить</div><div class="ctx-item" onclick="bZoomOut()">－ Отдалить</div>`;posCtx(menu,cx,cy);}
+function showCtxNode(cx,cy,id){const menu=document.getElementById('ctx');menu.innerHTML=`<div class="ctx-item" onclick="openNodeModal('${id}')">✎ Редактировать</div><div class="ctx-item" onclick="startConn(null,'${id}')">⟶ Соединить</div><div class="ctx-sep"></div><div class="ctx-item danger" onclick="deleteNodeById(null,'${id}')">✕ Удалить</div>`;posCtx(menu,cx,cy);}
+function showCtxEdge(id){const menu=document.getElementById('ctx');menu.innerHTML=`<div class="ctx-item danger" onclick="deleteEdge('${id}')">✕ Удалить связь</div>`;posCtx(menu,lastMX,lastMY);}
 function deleteEdge(id){edges=edges.filter(e=>e.id!==id);saveAll();renderBoard();hideCtx();}
-
-// connections
-function toggleConn(){
-  connMode=!connMode;cSrc=null;
-  document.getElementById('connBtn').classList.toggle('act',connMode);
-  hideTmp();if(connMode)showHint('Режим связей: кликни на цель-источник · ESC выход');else hideHint();
-  renderBoard();
-}
-function startConn(e,id){
-  if(e)e.stopPropagation();
-  if(!connMode){connMode=true;document.getElementById('connBtn').classList.add('act');}
-  cSrc=id;
-  document.querySelectorAll('.bnode').forEach(n=>n.classList.toggle('csrc',n.dataset.id===id));
-  showHint('Кликни на вторую цель · ESC отмена');hideCtx();
-}
-function handleConnTarget(toId){
-  if(!cSrc||cSrc===toId){cancelConn();return;}
-  if(!edges.find(e=>(e.from===cSrc&&e.to===toId)||(e.from===toId&&e.to===cSrc))){
-    const lbl=prompt('Метка связи (необязательно):')||'';
-    edges.push({id:String(eIdC++),from:cSrc,to:toId,lbl});saveAll();
-  }
-  cancelConn();renderBoard();
-}
+function toggleConn(){connMode=!connMode;cSrc=null;document.getElementById('connBtn').classList.toggle('act',connMode);hideTmp();if(connMode)showHint('Режим связей: кликни на цель-источник · ESC выход');else hideHint();renderBoard();}
+function startConn(e,id){if(e)e.stopPropagation();if(!connMode){connMode=true;document.getElementById('connBtn').classList.add('act');}cSrc=id;document.querySelectorAll('.bnode').forEach(n=>n.classList.toggle('csrc',n.dataset.id===id));showHint('Кликни на вторую цель · ESC отмена');hideCtx();}
+function handleConnTarget(toId){if(!cSrc||cSrc===toId){cancelConn();return;}if(!edges.find(e=>(e.from===cSrc&&e.to===toId)||(e.from===toId&&e.to===cSrc))){const lbl=prompt('Метка связи (необязательно):')||'';edges.push({id:String(eIdC++),from:cSrc,to:toId,lbl});saveAll();}cancelConn();renderBoard();}
 function cancelConn(){cSrc=null;document.querySelectorAll('.bnode').forEach(n=>n.classList.remove('csrc'));hideTmp();if(connMode)showHint('Режим связей: кликни на цель-источник · ESC выход');}
 function hideTmp(){const t=document.getElementById('tmpline');t.setAttribute('opacity','0');t.setAttribute('x1',0);t.setAttribute('y1',0);t.setAttribute('x2',0);t.setAttribute('y2',0);}
-
-function openNodeModal(id=null){
-  nmEditId=id;const node=id?nodes.find(n=>n.id===id):null;
-  document.getElementById('nmH').textContent=node?'Редактировать цель':'Новая цель';
-  document.getElementById('nmT').value=node?node.title:'';document.getElementById('nmN').value=node?node.note||'':'';
-  document.getElementById('nmTy').value=node?node.type:'goal';document.getElementById('nmO').value=node?node.order||'':'';
-  document.getElementById('nmDel').style.display=node?'block':'none';
-  nmCol=node?node.color:'blue';
-  document.querySelectorAll('.cgbtn').forEach(b=>{b.classList.toggle('sel',b.dataset.c===nmCol);b.style.borderColor=b.dataset.c===nmCol?'var(--text)':'transparent';});
-  document.getElementById('nodeModal').classList.add('open');hideCtx();
-  setTimeout(()=>document.getElementById('nmT').focus(),80);
-}
+function openNodeModal(id=null){nmEditId=id;const node=id?nodes.find(n=>n.id===id):null;document.getElementById('nmH').textContent=node?'Редактировать цель':'Новая цель';document.getElementById('nmT').value=node?node.title:'';document.getElementById('nmN').value=node?node.note||'':'';document.getElementById('nmTy').value=node?node.type:'goal';document.getElementById('nmO').value=node?node.order||'':'';document.getElementById('nmDel').style.display=node?'block':'none';nmCol=node?node.color:'blue';document.querySelectorAll('.cgbtn').forEach(b=>{b.classList.toggle('sel',b.dataset.c===nmCol);b.style.borderColor=b.dataset.c===nmCol?'var(--text)':'transparent';});document.getElementById('nodeModal').classList.add('open');hideCtx();setTimeout(()=>document.getElementById('nmT').focus(),80);}
 function openNodeModalAt(x,y){_pendingX=x;_pendingY=y;openNodeModal();hideCtx();}
 function closeNodeModal(){document.getElementById('nodeModal').classList.remove('open');nmEditId=null;_pendingX=null;_pendingY=null;}
 function closeNodeOut(e){if(e.target.id==='nodeModal')closeNodeModal();}
-function saveNode(){
-  const title=document.getElementById('nmT').value.trim();
-  if(!title){document.getElementById('nmT').style.borderColor='#904040';return;}
-  document.getElementById('nmT').style.borderColor='';
-  const d={title,note:document.getElementById('nmN').value.trim(),type:document.getElementById('nmTy').value,color:nmCol,order:document.getElementById('nmO').value.trim()};
-  if(nmEditId){const n=nodes.find(n=>n.id===nmEditId);if(n)Object.assign(n,d);}
-  else{const p=_pendingX!==null?{x:_pendingX,y:_pendingY}:s2c(window.innerWidth/2,window.innerHeight/2);d.x=p.x-95+(Math.random()-.5)*60;d.y=p.y-40+(Math.random()-.5)*40;d.id=String(nIdC++);nodes.push(d);}
-  saveAll();renderBoard();closeNodeModal();
-}
+function saveNode(){const title=document.getElementById('nmT').value.trim();if(!title){document.getElementById('nmT').style.borderColor='#904040';return;}document.getElementById('nmT').style.borderColor='';const d={title,note:document.getElementById('nmN').value.trim(),type:document.getElementById('nmTy').value,color:nmCol,order:document.getElementById('nmO').value.trim()};if(nmEditId){const n=nodes.find(n=>n.id===nmEditId);if(n)Object.assign(n,d);}else{const p=_pendingX!==null?{x:_pendingX,y:_pendingY}:s2c(window.innerWidth/2,window.innerHeight/2);d.x=p.x-95+(Math.random()-.5)*60;d.y=p.y-40+(Math.random()-.5)*40;d.id=String(nIdC++);nodes.push(d);}saveAll();renderBoard();closeNodeModal();}
 function deleteNodeById(e,id){if(e)e.stopPropagation();nodes=nodes.filter(n=>n.id!==id);edges=edges.filter(e=>e.from!==id&&e.to!==id);saveAll();renderBoard();hideCtx();}
 function delEditNode(){if(nmEditId)deleteNodeById(null,nmEditId);closeNodeModal();}
 function selC(col,btn){nmCol=col;document.querySelectorAll('.cgbtn').forEach(b=>{b.classList.toggle('sel',b===btn);b.style.borderColor=b===btn?'var(--text)':'transparent';});}
@@ -726,145 +544,158 @@ function selC(col,btn){nmCol=col;document.querySelectorAll('.cgbtn').forEach(b=>
 const bwrap=document.getElementById('bwrap');
 bwrap.addEventListener('contextmenu',e=>{e.preventDefault();if(e.target.closest('.bnode'))return;const p=s2c(e.clientX,e.clientY);showCtxCanvas(e.clientX,e.clientY,p.x,p.y);});
 bwrap.addEventListener('mousedown',e=>{if(e.target.closest('.bnode')||e.target.closest('.nab'))return;if(connMode&&cSrc)return;if(e.button!==0&&e.button!==1)return;hideCtx();bPanning=true;bPanStart={x:e.clientX-bPan.x,y:e.clientY-bPan.y};e.preventDefault();});
-document.addEventListener('mousemove',e=>{
-  lastMX=e.clientX;lastMY=e.clientY;
-  if(bDragNode){
-    const dx=(e.clientX-bDragStart.x)/bZoom,dy=(e.clientY-bDragStart.y)/bZoom;
-    bDragNode.x=bNodeStart.x+dx;bDragNode.y=bNodeStart.y+dy;
-    const el=document.querySelector(`.bnode[data-id="${bDragNode.id}"]`);
-    if(el){el.style.left=bDragNode.x+'px';el.style.top=bDragNode.y+'px';}
-    redrawEdges();
-  }else if(bPanning){
-    bPan.x=e.clientX-bPanStart.x;bPan.y=e.clientY-bPanStart.y;bApply();
-  }else if(connMode&&cSrc){
-    // Show temp line only when in connect mode AND source selected
-    const src=nodes.find(n=>n.id===cSrc);
-    if(src){
-      const r=bwrap.getBoundingClientRect();
-      const ex=(e.clientX-r.left-bPan.x)/bZoom,ey=(e.clientY-r.top-bPan.y)/bZoom;
-      const fw=src.w||190,fh=src.h||80;
-      const t=document.getElementById('tmpline');
-      t.setAttribute('opacity','0.75');t.setAttribute('x1',src.x+fw/2);t.setAttribute('y1',src.y+fh/2);t.setAttribute('x2',ex);t.setAttribute('y2',ey);
-    }
-  } else {
-    // No source selected, no drag — hide temp line
-    hideTmp();
-  }
-});
+document.addEventListener('mousemove',e=>{lastMX=e.clientX;lastMY=e.clientY;if(bDragNode){const dx=(e.clientX-bDragStart.x)/bZoom,dy=(e.clientY-bDragStart.y)/bZoom;bDragNode.x=bNodeStart.x+dx;bDragNode.y=bNodeStart.y+dy;const el=document.querySelector(`.bnode[data-id="${bDragNode.id}"]`);if(el){el.style.left=bDragNode.x+'px';el.style.top=bDragNode.y+'px';}redrawEdges();}else if(bPanning){bPan.x=e.clientX-bPanStart.x;bPan.y=e.clientY-bPanStart.y;bApply();}else if(connMode&&cSrc){const src=nodes.find(n=>n.id===cSrc);if(src){const r=bwrap.getBoundingClientRect();const ex=(e.clientX-r.left-bPan.x)/bZoom,ey=(e.clientY-r.top-bPan.y)/bZoom;const fw=src.w||190,fh=src.h||80;const t=document.getElementById('tmpline');t.setAttribute('opacity','0.75');t.setAttribute('x1',src.x+fw/2);t.setAttribute('y1',src.y+fh/2);t.setAttribute('x2',ex);t.setAttribute('y2',ey);}}else{hideTmp();}});
 document.addEventListener('mouseup',()=>{if(bDragNode)saveAll();bDragNode=null;bPanning=false;});
 bwrap.addEventListener('wheel',e=>{e.preventDefault();bZoom=Math.max(0.2,Math.min(3,bZoom*(e.deltaY>0?.9:1.11)));bApply();saveAll();},{passive:false});
 document.addEventListener('click',e=>{if(!e.target.closest('#ctx'))hideCtx();});
-document.addEventListener('keydown',e=>{
-  if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;
-  if(e.key==='Escape'){
-    if(document.querySelector('.overlay.open')){document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));return;}
-    if(cSrc){cancelConn();return;}
-    if(connMode){connMode=false;document.getElementById('connBtn').classList.remove('act');hideTmp();hideHint();renderBoard();}
-    hideCtx();
-  }
-});
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;if(e.key==='Escape'){if(document.querySelector('.overlay.open')){document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));return;}if(cSrc){cancelConn();return;}if(connMode){connMode=false;document.getElementById('connBtn').classList.remove('act');hideTmp();hideHint();renderBoard();}hideCtx();}});
 
-// ══ MUSIC ══
-function renderList(){
-  const list=document.getElementById('tlist');
-  document.getElementById('tempty').style.display=tracks.length?'none':'block';
-  list.querySelectorAll('.ti').forEach(el=>el.remove());
-  tracks.forEach((tr,idx)=>{
-    const el=document.createElement('div');el.className='ti'+(idx===curIdx?' playing':'');el.dataset.idx=idx;el.draggable=true;
-    const thumb=tr.thumb?`<img class="tthumb" src="${tr.thumb}" onerror="this.style.display='none'">`:`<div class="tph">♫</div>`;
-    const ind=idx===curIdx?`<div class="pbars"><div class="pbar"></div><div class="pbar"></div><div class="pbar"></div></div>`:`<span class="tnum">${idx+1}</span>`;
-    el.innerHTML=`<input type="checkbox" class="tcb" ${tr.sel?'checked':''} onclick="toggleSel(event,${idx})"><div class="tdrag">⋮⋮</div>${thumb}<div class="tinfo"><div class="tname">${eH(tr.title||tr.url)}</div><div class="tauth">${eH(tr.author||'SoundCloud')}</div><span class="ttype">${tr.isPl?'Альбом':'Трек'}</span></div>${ind}<button class="tdel" onclick="removeTrack(event,${idx})">✕</button>`;
-    el.addEventListener('click',e=>{if(e.target.closest('.tcb')||e.target.closest('.tdel')||e.target.closest('.tdrag'))return;playAt(idx);});
-    el.addEventListener('dragstart',e=>{dragTI=idx;e.dataTransfer.effectAllowed='move';});
-    el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('dover');});
-    el.addEventListener('dragleave',()=>el.classList.remove('dover'));
-    el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('dover');if(dragTI===null||dragTI===idx)return;const m=tracks.splice(dragTI,1)[0];tracks.splice(idx,0,m);if(curIdx===dragTI)curIdx=idx;else if(curIdx>dragTI&&curIdx<=idx)curIdx--;else if(curIdx<dragTI&&curIdx>=idx)curIdx++;dragTI=null;saveAll();renderList();});
-    el.addEventListener('dragend',()=>{dragTI=null;});
-    list.appendChild(el);
-  });
-}
+// ══ VISUALIZER ══
+// Waveform
+const WV_COUNT=48;
+let wvBars=[],wvPhase=0,wvAmplitude=0,wvTarget=0;
+function initWaveform(){const wf=document.getElementById('waveform');wf.innerHTML='';wvBars=[];for(let i=0;i<WV_COUNT;i++){const b=document.createElement('div');b.className='wv-bar';b.style.height='3px';wf.appendChild(b);wvBars.push(b);}}
+function animateWaveform(){if(isPlaying){wvTarget=1;const t=Date.now()/1000;wvBars.forEach((b,i)=>{const phase=t*2.5+i*0.28;const h=3+Math.abs(Math.sin(phase)*Math.sin(phase*0.7+1)*Math.cos(phase*0.5)*62);b.style.height=h+'px';const hue=30+i*1.2;b.style.background=`linear-gradient(to top,hsl(${hue},55%,30%),hsl(${hue+15},65%,60%))`});}else{wvBars.forEach(b=>{const ch=parseFloat(b.style.height||'3');b.style.height=Math.max(3,ch*.85)+'px';});}requestAnimationFrame(animateWaveform);}
+
+// Particles
+const particles=[];
+let particleCanvas,particleCtx;
+function initParticles(){particleCanvas=document.getElementById('particles');particleCtx=particleCanvas.getContext('2d');resizeCanvas();window.addEventListener('resize',resizeCanvas);spawnParticles();animateParticles();}
+function resizeCanvas(){particleCanvas.width=particleCanvas.offsetWidth;particleCanvas.height=particleCanvas.offsetHeight;}
+function spawnParticles(){for(let i=0;i<50;i++){particles.push(newParticle());}}
+function newParticle(){const w=particleCanvas.width||800,h=particleCanvas.height||600;return{x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.5+0.5,vx:(Math.random()-.5)*.4,vy:-(Math.random()*.6+.1),alpha:Math.random()*.6+.1,life:Math.random(),maxLife:Math.random()*200+100,color:Math.random()<.6?'201,169,110':'160,140,200'};}
+function animateParticles(){particleCtx.clearRect(0,0,particleCanvas.width,particleCanvas.height);if(isPlaying){particles.forEach((p,i)=>{p.life++;p.x+=p.vx;p.y+=p.vy;p.alpha=Math.sin(p.life/p.maxLife*Math.PI)*0.7;if(p.life>p.maxLife){particles[i]=newParticle();}particleCtx.beginPath();particleCtx.arc(p.x,p.y,p.r,0,Math.PI*2);particleCtx.fillStyle=`rgba(${p.color},${p.alpha})`;particleCtx.fill();});}requestAnimationFrame(animateParticles);}
+
+// Vinyl spin
+function setVinylState(playing){const vinyl=document.getElementById('vinyl');if(playing){vinyl.classList.add('spinning');}else{vinyl.classList.remove('spinning');}}
+function setAurora(playing){document.getElementById('aurora').classList.toggle('playing',playing);}
+
+// ══ MUSIC PLAYER ══
+function renderList(){const list=document.getElementById('tlist');document.getElementById('tempty').style.display=tracks.length?'none':'block';list.querySelectorAll('.ti').forEach(el=>el.remove());tracks.forEach((tr,idx)=>{const el=document.createElement('div');el.className='ti'+(idx===curIdx?' playing':'');el.dataset.idx=idx;el.draggable=true;const thumb=tr.thumb?`<img class="tthumb" src="${tr.thumb}" onerror="this.style.display='none'">`:`<div class="tph">♫</div>`;const ind=idx===curIdx?`<div class="pbars"><div class="pbar"></div><div class="pbar"></div><div class="pbar"></div></div>`:`<span class="tnum">${idx+1}</span>`;el.innerHTML=`<input type="checkbox" class="tcb" ${tr.sel?'checked':''} onclick="toggleSel(event,${idx})"><div class="tdrag">⋮⋮</div>${thumb}<div class="tinfo"><div class="tname">${eH(tr.title||tr.url)}</div><div class="tauth">${eH(tr.author||'SoundCloud')}</div><span class="ttype">${tr.isPl?'Альбом':'Трек'}</span></div>${ind}<button class="tdel" onclick="removeTrack(event,${idx})">✕</button>`;el.addEventListener('click',e=>{if(e.target.closest('.tcb')||e.target.closest('.tdel')||e.target.closest('.tdrag'))return;playAt(idx);});el.addEventListener('dragstart',e=>{dragTI=idx;e.dataTransfer.effectAllowed='move';});el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('dover');});el.addEventListener('dragleave',()=>el.classList.remove('dover'));el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('dover');if(dragTI===null||dragTI===idx)return;const m=tracks.splice(dragTI,1)[0];tracks.splice(idx,0,m);if(curIdx===dragTI)curIdx=idx;else if(curIdx>dragTI&&curIdx<=idx)curIdx--;else if(curIdx<dragTI&&curIdx>=idx)curIdx++;dragTI=null;saveAll();renderList();});el.addEventListener('dragend',()=>{dragTI=null;});list.appendChild(el);});}
 function toggleSel(e,idx){e.stopPropagation();tracks[idx].sel=!tracks[idx].sel;saveAll();renderList();}
 function removeTrack(e,idx){e.stopPropagation();tracks.splice(idx,1);if(curIdx>=tracks.length)curIdx=tracks.length-1;saveAll();renderList();}
 
-async function addUrl(){
-  const inp=document.getElementById('urlIn');const url=inp.value.trim();
-  if(!url||!url.includes('soundcloud.com')){inp.style.borderColor='#904040';setTimeout(()=>inp.style.borderColor='',1200);return;}
-  inp.value='';showToast('Загружаем...');
-  try{
-    const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);
-    const d=await r.json();
-    tracks.push({id:String(tIdC++),url,title:d.title,author:d.author_name,thumb:d.thumbnail_url,sel:false,isPl:url.includes('/sets/')});
-  }catch{
-    tracks.push({id:String(tIdC++),url,title:url,author:'SoundCloud',thumb:null,sel:false,isPl:url.includes('/sets/')});
-  }
-  saveAll();renderList();if(curIdx<0&&tracks.length===1)playAt(0);hideToast();
-}
+async function addUrl(){const inp=document.getElementById('urlIn');const url=inp.value.trim();if(!url||!url.includes('soundcloud.com')){inp.style.borderColor='#904040';setTimeout(()=>inp.style.borderColor='',1200);return;}inp.value='';showToast('Загружаем...');try{const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);const d=await r.json();tracks.push({id:String(tIdC++),url,title:d.title,author:d.author_name,thumb:d.thumbnail_url,sel:false,isPl:url.includes('/sets/')});}catch{tracks.push({id:String(tIdC++),url,title:url,author:'SoundCloud',thumb:null,sel:false,isPl:url.includes('/sets/')});}saveAll();renderList();if(curIdx<0&&tracks.length===1)playAt(0);hideToast();}
 
+// ══ POLLING (fixes background tab auto-switch) ══
+function startPoll(){
+  stopPoll();
+  lastPos=0;lastDur=0;stuckCount=0;switchingTrack=false;
+  pollTimer=setInterval(()=>{
+    if(!widget||!wReady||switchingTrack)return;
+    widget.getPosition(pos=>{
+      widget.getDuration(dur=>{
+        if(!dur||dur<=0)return;
+        // Update UI
+        const pct=pos/dur;
+        document.getElementById('pin').style.width=(pct*100)+'%';
+        document.getElementById('pthumb').style.left=(pct*100)+'%';
+        document.getElementById('tC').textContent=fmtT(pos);
+        document.getElementById('tD').textContent=fmtT(dur);
+        lastDur=dur;
+        // Auto-switch: if within last 1.5s of track and position advancing
+        if(dur>0&&pos>=dur-1500&&pos>0){
+          switchingTrack=true;
+          setTimeout(()=>{onFinish();},800);
+          return;
+        }
+        // Stuck detection: if playing but position hasn't changed in 3 polls
+        if(isPlaying&&Math.abs(pos-lastPos)<200){
+          stuckCount++;
+          if(stuckCount>=6){stuckCount=0;if(dur>0&&pos>=dur-3000){switchingTrack=true;setTimeout(()=>{onFinish();},500);}}
+        }else{stuckCount=0;}
+        lastPos=pos;
+      });
+    });
+  },800);
+}
+function stopPoll(){if(pollTimer){clearInterval(pollTimer);pollTimer=null;}}
+
+// ══ SC WIDGET INIT ══
 function initWidget(url){
   const iframe=document.getElementById('sc-iframe');
-  document.getElementById('scE').style.display='none';iframe.style.display='block';
-  // For playlists: SC widget handles internal track progression automatically.
-  // FINISH fires when the entire playlist ends, so we then move to next in our list.
-  iframe.src='https://w.soundcloud.com/player/?url='+encodeURIComponent(url)+'&color=%23c9a96e&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_teaser=false&visual=true';
-  wReady=false;widget=null;
+  stopPoll();wReady=false;widget=null;switchingTrack=false;
+  iframe.src='https://w.soundcloud.com/player/?url='+encodeURIComponent(url)+'&color=%23c9a96e&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_teaser=false&visual=false';
   iframe.onload=()=>{setTimeout(()=>{
     try{
       widget=SC.Widget(iframe);
       widget.bind(SC.Widget.Events.READY,()=>{
         wReady=true;
-        // Apply volume immediately on ready
-        const v=parseInt(document.getElementById('vol').value);
-        widget.setVolume(v);
+        widget.setVolume(parseInt(document.getElementById('vol').value));
+        widget.getCurrentSound(s=>{if(s)updateNP(s);});
+        startPoll();
       });
       widget.bind(SC.Widget.Events.PLAY,()=>{
-        isPlaying=true;document.getElementById('ppBtn').textContent='⏸';
+        isPlaying=true;
+        document.getElementById('ppBtn').textContent='⏸';
+        setVinylState(true);setAurora(true);
         widget.getCurrentSound(s=>{if(s)updateNP(s);});
       });
-      widget.bind(SC.Widget.Events.PAUSE,()=>{isPlaying=false;document.getElementById('ppBtn').textContent='▶';});
-      widget.bind(SC.Widget.Events.FINISH,()=>onFinish());
-      widget.bind(SC.Widget.Events.PLAY_PROGRESS,data=>{
-        document.getElementById('pin').style.width=(data.relativePosition*100)+'%';
-        document.getElementById('tC').textContent=fmtT(data.currentPosition);
+      widget.bind(SC.Widget.Events.PAUSE,()=>{
+        isPlaying=false;
+        document.getElementById('ppBtn').textContent='▶';
+        setVinylState(false);setAurora(false);
       });
-      widget.bind(SC.Widget.Events.ERROR,()=>onFinish());
+      widget.bind(SC.Widget.Events.FINISH,()=>{
+        if(!switchingTrack){switchingTrack=true;onFinish();}
+      });
+      widget.bind(SC.Widget.Events.ERROR,()=>{
+        if(!switchingTrack){switchingTrack=true;setTimeout(()=>onFinish(),500);}
+      });
     }catch(err){}
   },400);};
 }
+
 function updateNP(s){
-  document.getElementById('npT').textContent=s.title||'—';document.getElementById('npA').textContent=s.user?s.user.username:'';
+  const title=s.title||'—';
+  document.getElementById('npT').textContent=title;
+  document.getElementById('npA').textContent=s.user?s.user.username:'';
   const b=document.getElementById('npB');b.style.display='inline-block';b.textContent=tracks[curIdx]?.isPl?'Альбом':'Трек';
+  // Vinyl thumb
+  const vt=document.getElementById('vinylThumb');
+  const th=tracks[curIdx]?.thumb||s.artwork_url||s.user?.avatar_url;
+  if(th){vt.src=th;vt.style.display='block';}else{vt.style.display='none';}
   if(s.duration)document.getElementById('tD').textContent=fmtT(s.duration);
   updateTitle();
 }
-function onFinish(){if(playMode==='single'){if(widget&&wReady){widget.seekTo(0);widget.play();}return;}playNext();}
+
+function onFinish(){
+  if(playMode==='single'){switchingTrack=false;if(widget&&wReady){widget.seekTo(0);widget.play();}return;}
+  playNext();
+}
+
 function getQ(){return playMode==='selected'?tracks.map((t,i)=>({t,i})).filter(x=>x.t.sel):tracks.map((t,i)=>({t,i}));}
+
 function playAt(idx){
   curIdx=idx;saveAll();renderList();const tr=tracks[idx];if(!tr)return;
-  initWidget(tr.url);document.getElementById('ppBtn').textContent='⏸';isPlaying=true;
-  document.getElementById('pin').style.width='0%';document.getElementById('tC').textContent='0:00';
-  document.getElementById('npT').textContent=tr.title||'—';document.getElementById('npA').textContent=tr.author||'';
-  document.getElementById('npB').style.display='inline-block';document.getElementById('npB').textContent=tr.isPl?'Альбом':'Трек';
+  initWidget(tr.url);
+  document.getElementById('ppBtn').textContent='⏸';isPlaying=true;
+  document.getElementById('pin').style.width='0%';document.getElementById('pthumb').style.left='0%';
+  document.getElementById('tC').textContent='0:00';
+  document.getElementById('npT').textContent=tr.title||'—';
+  document.getElementById('npA').textContent=tr.author||'';
+  document.getElementById('npB').style.display='inline-block';
+  document.getElementById('npB').textContent=tr.isPl?'Альбом':'Трек';
+  const vt=document.getElementById('vinylThumb');
+  if(tr.thumb){vt.src=tr.thumb;vt.style.display='block';}else{vt.style.display='none';}
+  setVinylState(true);setAurora(true);
   updateTitle();
 }
-function playNext(){const q=getQ();if(!q.length)return;if(playMode==='shuffle'){const o=q.filter(x=>x.i!==curIdx);playAt((o.length?o[Math.floor(Math.random()*o.length)]:q[0]).i);return;}const cur=q.findIndex(x=>x.i===curIdx);playAt(q[(cur+1)%q.length].i);}
+
+function playNext(){const q=getQ();if(!q.length){switchingTrack=false;return;}if(playMode==='shuffle'){const o=q.filter(x=>x.i!==curIdx);playAt((o.length?o[Math.floor(Math.random()*o.length)]:q[0]).i);}else{const cur=q.findIndex(x=>x.i===curIdx);playAt(q[(cur+1)%q.length].i);}}
 function playPrev(){const q=getQ();if(!q.length)return;const cur=q.findIndex(x=>x.i===curIdx);playAt(q[(cur-1+q.length)%q.length].i);}
-function togglePP(){if(curIdx<0&&tracks.length>0){playAt(0);return;}if(!widget||!wReady)return;if(isPlaying)widget.pause();else widget.play();}
-function setVol(v){
-  document.getElementById('volPct').textContent=v+'%';
-  if(widget&&wReady)widget.setVolume(parseInt(v));
-}
-function seekTo(e){if(!widget||!wReady)return;const r=document.getElementById('pout').getBoundingClientRect();const pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));widget.getDuration(dur=>{widget.seekTo(Math.floor(pct*dur));document.getElementById('pin').style.width=(pct*100)+'%';});}
+function togglePP(){if(curIdx<0&&tracks.length>0){playAt(0);return;}if(!widget||!wReady)return;if(isPlaying){widget.pause();setVinylState(false);setAurora(false);}else{widget.play();setVinylState(true);setAurora(true);}}
+function setVol(v){document.getElementById('volPct').textContent=v+'%';if(widget&&wReady)widget.setVolume(parseInt(v));}
+function seekTo(e){if(!widget||!wReady)return;const r=document.getElementById('pout').getBoundingClientRect();const pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));widget.getDuration(dur=>{widget.seekTo(Math.floor(pct*dur));document.getElementById('pin').style.width=(pct*100)+'%';document.getElementById('pthumb').style.left=(pct*100)+'%';});}
 function setMode(m){playMode=m;document.querySelectorAll('.mbtn').forEach(b=>b.classList.toggle('act',b.dataset.m===m));saveAll();}
 function fmtT(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
 
 // ══ INIT ══
-loadAll();
-bApply();
-renderKanban();
-renderBoard();
-renderList();
+loadAll();bApply();renderKanban();renderBoard();renderList();
 document.querySelectorAll('.mbtn').forEach(b=>b.classList.toggle('act',b.dataset.m===playMode));
-if(curIdx>=0&&tracks[curIdx]){const tr=tracks[curIdx];document.getElementById('npT').textContent=tr.title||'—';document.getElementById('npA').textContent=tr.author||'';}
+if(curIdx>=0&&tracks[curIdx]){const tr=tracks[curIdx];document.getElementById('npT').textContent=tr.title||'—';document.getElementById('npA').textContent=tr.author||'';if(tr.thumb){document.getElementById('vinylThumb').src=tr.thumb;document.getElementById('vinylThumb').style.display='block';}}
+initWaveform();animateWaveform();
+initParticles();
 updateTitle();
 </script>
 </body>
