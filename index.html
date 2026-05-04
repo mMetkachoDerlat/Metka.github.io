@@ -281,6 +281,8 @@ select option{background:var(--bg2)}
       <button class="mbtn" data-m="selected" onclick="setMode('selected')">Выбранные</button>
       <button class="mbtn" data-m="single" onclick="setMode('single')">Повтор</button>
       <button class="mbtn" data-m="shuffle" onclick="setMode('shuffle')">Шаффл</button>
+      <!-- FIX 3: Random track button -->
+      <button class="mbtn" onclick="playRandom()" title="Случайный трек">🎲 Случайный</button>
     </div>
     <div class="tlist" id="tlist">
       <div class="emhint" id="tempty">Пусто — добавь ссылку SoundCloud</div>
@@ -312,6 +314,7 @@ select option{background:var(--bg2)}
       <div class="vc-row" style="justify-content:center;gap:16px">
         <div class="vol-section">
           <span class="vol-icon">♪</span>
+          <!-- FIX 1: volume loaded from localStorage -->
           <input type="range" class="vol-slider" id="vol" min="0" max="100" value="25" oninput="setVol(this.value)"/>
           <span class="vol-pct" id="volPct">25%</span>
         </div>
@@ -408,9 +411,41 @@ let widget=null,wReady=false;
 let currentTab='kanban',lastMX=0,lastMY=0,_pendingX=null,_pendingY=null;
 let pollTimer=null,lastPos=0,switchingTrack=false,stuckCount=0;
 
+// FIX 1: Volume persisted separately
+let savedVolume=25;
+
 // ══ PERSIST ══
-function saveAll(){try{localStorage.setItem('k_cards',JSON.stringify(cards));localStorage.setItem('k_idc',kIdC);localStorage.setItem('b_nodes',JSON.stringify(nodes));localStorage.setItem('b_edges',JSON.stringify(edges));localStorage.setItem('b_pan',JSON.stringify(bPan));localStorage.setItem('b_zoom',bZoom);localStorage.setItem('b_nidc',nIdC);localStorage.setItem('b_eidc',eIdC);localStorage.setItem('m_tracks',JSON.stringify(tracks));localStorage.setItem('m_mode',playMode);localStorage.setItem('m_cur',curIdx);localStorage.setItem('m_tidc',tIdC);}catch(e){}}
-function loadAll(){try{cards=JSON.parse(localStorage.getItem('k_cards')||'[]');kIdC=parseInt(localStorage.getItem('k_idc')||'1');nodes=JSON.parse(localStorage.getItem('b_nodes')||'[]');edges=JSON.parse(localStorage.getItem('b_edges')||'[]');bPan=JSON.parse(localStorage.getItem('b_pan')||'{"x":400,"y":300}');bZoom=parseFloat(localStorage.getItem('b_zoom')||'1');nIdC=parseInt(localStorage.getItem('b_nidc')||'1');eIdC=parseInt(localStorage.getItem('b_eidc')||'1');tracks=JSON.parse(localStorage.getItem('m_tracks')||'[]');playMode=localStorage.getItem('m_mode')||'all';curIdx=parseInt(localStorage.getItem('m_cur')||'-1');tIdC=parseInt(localStorage.getItem('m_tidc')||'1');}catch(e){}}
+function saveAll(){try{
+  localStorage.setItem('k_cards',JSON.stringify(cards));
+  localStorage.setItem('k_idc',kIdC);
+  localStorage.setItem('b_nodes',JSON.stringify(nodes));
+  localStorage.setItem('b_edges',JSON.stringify(edges));
+  localStorage.setItem('b_pan',JSON.stringify(bPan));
+  localStorage.setItem('b_zoom',bZoom);
+  localStorage.setItem('b_nidc',nIdC);
+  localStorage.setItem('b_eidc',eIdC);
+  localStorage.setItem('m_tracks',JSON.stringify(tracks));
+  localStorage.setItem('m_mode',playMode);
+  localStorage.setItem('m_cur',curIdx);
+  localStorage.setItem('m_tidc',tIdC);
+}catch(e){}}
+
+function loadAll(){try{
+  cards=JSON.parse(localStorage.getItem('k_cards')||'[]');
+  kIdC=parseInt(localStorage.getItem('k_idc')||'1');
+  nodes=JSON.parse(localStorage.getItem('b_nodes')||'[]');
+  edges=JSON.parse(localStorage.getItem('b_edges')||'[]');
+  bPan=JSON.parse(localStorage.getItem('b_pan')||'{"x":400,"y":300}');
+  bZoom=parseFloat(localStorage.getItem('b_zoom')||'1');
+  nIdC=parseInt(localStorage.getItem('b_nidc')||'1');
+  eIdC=parseInt(localStorage.getItem('b_eidc')||'1');
+  tracks=JSON.parse(localStorage.getItem('m_tracks')||'[]');
+  playMode=localStorage.getItem('m_mode')||'all';
+  curIdx=parseInt(localStorage.getItem('m_cur')||'-1');
+  tIdC=parseInt(localStorage.getItem('m_tidc')||'1');
+  // FIX 1: Load saved volume
+  savedVolume=parseInt(localStorage.getItem('m_volume')||'25');
+}catch(e){}}
 
 // ══ UTILS ══
 function eH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
@@ -485,8 +520,6 @@ const ctx2=VC.getContext('2d');
 let vW,vH,vCX,vCY;
 let visPlaying=false;
 let visTime=0;
-
-// Particles pool
 const PARTS=[];
 const NPART=80;
 
@@ -501,220 +534,81 @@ function initVis(){
 function mkPart(){
   const angle=Math.random()*Math.PI*2;
   const r=80+Math.random()*Math.min(vW,vH)*0.35;
-  return{
-    x:vCX+Math.cos(angle)*r,
-    y:vCY+Math.sin(angle)*r,
-    vx:(Math.random()-.5)*.6,
-    vy:(Math.random()-.5)*.6,
-    size:Math.random()*2+.5,
-    alpha:Math.random()*.5+.1,
-    hue:25+Math.random()*40,
-    life:Math.random()*200,
-    maxLife:150+Math.random()*150,
-    orbit:Math.random()<.4,
-    orbitR:60+Math.random()*Math.min(vW,vH)*.25,
-    orbitA:Math.random()*Math.PI*2,
-    orbitS:(Math.random()-.5)*.008
-  }
+  return{x:vCX+Math.cos(angle)*r,y:vCY+Math.sin(angle)*r,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6,size:Math.random()*2+.5,alpha:Math.random()*.5+.1,hue:25+Math.random()*40,life:Math.random()*200,maxLife:150+Math.random()*150,orbit:Math.random()<.4,orbitR:60+Math.random()*Math.min(vW,vH)*.25,orbitA:Math.random()*Math.PI*2,orbitS:(Math.random()-.5)*.008}
 }
 
-// Orbital ring params
-const RINGS=[
-  {r:0.18,speed:0.004,nodes:12,phase:0},
-  {r:0.28,speed:-0.003,nodes:18,phase:1.1},
-  {r:0.38,speed:0.002,nodes:24,phase:2.3},
-  {r:0.48,speed:-0.0015,nodes:30,phase:0.7},
-];
-
-let ringPhase=0;
-let pulseTime=0;
-let energyAmp=0; // 0..1 based on playing state
+const RINGS=[{r:0.18,speed:0.004,nodes:12,phase:0},{r:0.28,speed:-0.003,nodes:18,phase:1.1},{r:0.38,speed:0.002,nodes:24,phase:2.3},{r:0.48,speed:-0.0015,nodes:30,phase:0.7}];
+let ringPhase=0,pulseTime=0,energyAmp=0;
 
 function drawVis(){
   requestAnimationFrame(drawVis);
   visTime+=0.016;
-
-  // Smooth energy
   const targetEnergy=visPlaying?1:0;
   energyAmp+=(targetEnergy-energyAmp)*0.04;
-
   ctx2.clearRect(0,0,vW,vH);
-
-  // Background nebula glow
-  if(energyAmp>0.01){
-    const grad=ctx2.createRadialGradient(vCX,vCY,0,vCX,vCY,Math.min(vW,vH)*0.5);
-    grad.addColorStop(0,`rgba(100,60,20,${0.12*energyAmp})`);
-    grad.addColorStop(0.5,`rgba(60,30,80,${0.07*energyAmp})`);
-    grad.addColorStop(1,'rgba(0,0,0,0)');
-    ctx2.fillStyle=grad;
-    ctx2.fillRect(0,0,vW,vH);
-  }
-
-  const minDim=Math.min(vW,vH);
-  ringPhase+=0.008;
-  pulseTime+=0.05;
-
-  // Orbital rings
-  RINGS.forEach((ring,ri)=>{
-    const R=minDim*ring.r;
-    const phase=ringPhase*ring.speed*200+ring.phase;
-    const alpha=(0.1+energyAmp*0.25)*(0.6+0.4*Math.sin(pulseTime*0.7+ri));
-
-    // Ring circle
-    ctx2.beginPath();
-    ctx2.arc(vCX,vCY,R,0,Math.PI*2);
-    ctx2.strokeStyle=`rgba(201,169,110,${alpha*0.3})`;
-    ctx2.lineWidth=.5;
-    ctx2.stroke();
-
-    // Nodes on ring
-    for(let i=0;i<ring.nodes;i++){
-      const a=phase+(i/ring.nodes)*Math.PI*2;
-      const nx=vCX+Math.cos(a)*R;
-      const ny=vCY+Math.sin(a)*R;
-      const pulse=0.5+0.5*Math.sin(pulseTime*1.5+i*0.8+ri*1.2);
-      const nodeAlpha=(0.15+pulse*0.6*energyAmp);
-      const nodeSize=1+pulse*2.5*energyAmp;
-
-      // Glow
-      if(energyAmp>0.1){
-        const g=ctx2.createRadialGradient(nx,ny,0,nx,ny,nodeSize*4);
-        g.addColorStop(0,`rgba(201,169,110,${nodeAlpha*0.8})`);
-        g.addColorStop(1,'rgba(201,169,110,0)');
-        ctx2.fillStyle=g;
-        ctx2.beginPath();
-        ctx2.arc(nx,ny,nodeSize*4,0,Math.PI*2);
-        ctx2.fill();
-      }
-
-      // Dot
-      ctx2.beginPath();
-      ctx2.arc(nx,ny,nodeSize,0,Math.PI*2);
-      ctx2.fillStyle=`rgba(201,169,110,${nodeAlpha})`;
-      ctx2.fill();
-
-      // Connect to center (spider web lines) — only some
-      if(i%3===0&&energyAmp>0.3){
-        ctx2.beginPath();
-        ctx2.moveTo(vCX,vCY);
-        ctx2.lineTo(nx,ny);
-        ctx2.strokeStyle=`rgba(139,111,66,${0.06*energyAmp*pulse})`;
-        ctx2.lineWidth=.5;
-        ctx2.stroke();
-      }
-    }
-
-    // Connect adjacent nodes
-    for(let i=0;i<ring.nodes;i++){
-      const a1=phase+(i/ring.nodes)*Math.PI*2;
-      const a2=phase+((i+1)/ring.nodes)*Math.PI*2;
-      const x1=vCX+Math.cos(a1)*R,y1=vCY+Math.sin(a1)*R;
-      const x2=vCX+Math.cos(a2)*R,y2=vCY+Math.sin(a2)*R;
-      const connAlpha=(0.05+energyAmp*0.15)*(0.4+0.6*Math.sin(pulseTime+i));
-      ctx2.beginPath();
-      ctx2.moveTo(x1,y1);
-      ctx2.lineTo(x2,y2);
-      ctx2.strokeStyle=`rgba(201,169,110,${connAlpha})`;
-      ctx2.lineWidth=.3+energyAmp*.4;
-      ctx2.stroke();
-    }
-  });
-
-  // Core center orb
-  const coreSize=8+energyAmp*12+Math.sin(pulseTime*2)*2*energyAmp;
-  const coreGrad=ctx2.createRadialGradient(vCX,vCY,0,vCX,vCY,coreSize*3);
-  coreGrad.addColorStop(0,`rgba(255,220,150,${0.3+energyAmp*0.5})`);
-  coreGrad.addColorStop(0.4,`rgba(201,169,110,${0.15+energyAmp*0.3})`);
-  coreGrad.addColorStop(1,'rgba(201,169,110,0)');
-  ctx2.fillStyle=coreGrad;
-  ctx2.beginPath();
-  ctx2.arc(vCX,vCY,coreSize*3,0,Math.PI*2);
-  ctx2.fill();
-
-  ctx2.beginPath();
-  ctx2.arc(vCX,vCY,coreSize,0,Math.PI*2);
-  ctx2.fillStyle=`rgba(255,235,180,${0.5+energyAmp*0.4})`;
-  ctx2.fill();
-
-  // Radial spectrum bars (simulate frequency)
-  const BARS=64;
-  for(let i=0;i<BARS;i++){
-    const a=(i/BARS)*Math.PI*2+pulseTime*0.05;
-    const wave=Math.abs(Math.sin(i*0.35+pulseTime*1.8)*Math.sin(i*0.7+pulseTime*0.9));
-    const barH=(6+wave*60)*energyAmp;
-    const innerR=minDim*0.05+coreSize;
-    const outerR=innerR+barH;
-    const hue=28+i*1.2;
-    const barAlpha=0.3+wave*0.6*energyAmp;
-    ctx2.beginPath();
-    ctx2.moveTo(vCX+Math.cos(a)*innerR,vCY+Math.sin(a)*innerR);
-    ctx2.lineTo(vCX+Math.cos(a)*outerR,vCY+Math.sin(a)*outerR);
-    ctx2.strokeStyle=`hsla(${hue},70%,55%,${barAlpha})`;
-    ctx2.lineWidth=2;
-    ctx2.lineCap='round';
-    ctx2.stroke();
-  }
-
-  // Floating particles
-  PARTS.forEach((p,idx)=>{
-    p.life++;
-    if(p.orbit){
-      p.orbitA+=p.orbitS*(0.3+energyAmp*1.5);
-      p.x=vCX+Math.cos(p.orbitA)*p.orbitR;
-      p.y=vCY+Math.sin(p.orbitA)*p.orbitR;
-    }else{
-      p.x+=p.vx*(0.2+energyAmp*.8);
-      p.y+=p.vy*(0.2+energyAmp*.8);
-    }
-    const lifeRatio=p.life/p.maxLife;
-    const alpha=p.alpha*Math.sin(lifeRatio*Math.PI)*(0.2+energyAmp*0.7);
-    if(p.life>p.maxLife||p.x<-50||p.x>vW+50||p.y<-50||p.y>vH+50)PARTS[idx]=mkPart();
-    ctx2.beginPath();
-    ctx2.arc(p.x,p.y,p.size*(0.5+energyAmp*.5),0,Math.PI*2);
-    ctx2.fillStyle=`hsla(${p.hue},60%,70%,${alpha})`;
-    ctx2.fill();
-  });
-
-  // Cross-ring connections (dynamic) when energy high
-  if(energyAmp>0.5){
-    const r0=RINGS[0],r2=RINGS[2];
-    const phA=ringPhase*r0.speed*200+r0.phase;
-    const phB=ringPhase*r2.speed*200+r2.phase;
-    for(let i=0;i<4;i++){
-      const a1=phA+(i/4)*Math.PI*2;
-      const a2=phB+(i/4)*Math.PI*2+0.5;
-      const x1=vCX+Math.cos(a1)*minDim*r0.r;
-      const y1=vCY+Math.sin(a1)*minDim*r0.r;
-      const x2=vCX+Math.cos(a2)*minDim*r2.r;
-      const y2=vCY+Math.sin(a2)*minDim*r2.r;
-      ctx2.beginPath();
-      ctx2.moveTo(x1,y1);
-      ctx2.lineTo(x2,y2);
-      ctx2.strokeStyle=`rgba(180,120,60,${0.08*(energyAmp-.5)*2})`;
-      ctx2.lineWidth=.5;
-      ctx2.stroke();
-    }
-  }
+  if(energyAmp>0.01){const grad=ctx2.createRadialGradient(vCX,vCY,0,vCX,vCY,Math.min(vW,vH)*0.5);grad.addColorStop(0,`rgba(100,60,20,${0.12*energyAmp})`);grad.addColorStop(0.5,`rgba(60,30,80,${0.07*energyAmp})`);grad.addColorStop(1,'rgba(0,0,0,0)');ctx2.fillStyle=grad;ctx2.fillRect(0,0,vW,vH)}
+  const minDim=Math.min(vW,vH);ringPhase+=0.008;pulseTime+=0.05;
+  RINGS.forEach((ring,ri)=>{const R=minDim*ring.r;const phase=ringPhase*ring.speed*200+ring.phase;const alpha=(0.1+energyAmp*0.25)*(0.6+0.4*Math.sin(pulseTime*0.7+ri));ctx2.beginPath();ctx2.arc(vCX,vCY,R,0,Math.PI*2);ctx2.strokeStyle=`rgba(201,169,110,${alpha*0.3})`;ctx2.lineWidth=.5;ctx2.stroke();for(let i=0;i<ring.nodes;i++){const a=phase+(i/ring.nodes)*Math.PI*2;const nx=vCX+Math.cos(a)*R,ny=vCY+Math.sin(a)*R;const pulse=0.5+0.5*Math.sin(pulseTime*1.5+i*0.8+ri*1.2);const nodeAlpha=(0.15+pulse*0.6*energyAmp);const nodeSize=1+pulse*2.5*energyAmp;if(energyAmp>0.1){const g=ctx2.createRadialGradient(nx,ny,0,nx,ny,nodeSize*4);g.addColorStop(0,`rgba(201,169,110,${nodeAlpha*0.8})`);g.addColorStop(1,'rgba(201,169,110,0)');ctx2.fillStyle=g;ctx2.beginPath();ctx2.arc(nx,ny,nodeSize*4,0,Math.PI*2);ctx2.fill()}ctx2.beginPath();ctx2.arc(nx,ny,nodeSize,0,Math.PI*2);ctx2.fillStyle=`rgba(201,169,110,${nodeAlpha})`;ctx2.fill();if(i%3===0&&energyAmp>0.3){ctx2.beginPath();ctx2.moveTo(vCX,vCY);ctx2.lineTo(nx,ny);ctx2.strokeStyle=`rgba(139,111,66,${0.06*energyAmp*pulse})`;ctx2.lineWidth=.5;ctx2.stroke()}}for(let i=0;i<ring.nodes;i++){const a1=phase+(i/ring.nodes)*Math.PI*2,a2=phase+((i+1)/ring.nodes)*Math.PI*2;const x1=vCX+Math.cos(a1)*R,y1=vCY+Math.sin(a1)*R,x2=vCX+Math.cos(a2)*R,y2=vCY+Math.sin(a2)*R;const connAlpha=(0.05+energyAmp*0.15)*(0.4+0.6*Math.sin(pulseTime+i));ctx2.beginPath();ctx2.moveTo(x1,y1);ctx2.lineTo(x2,y2);ctx2.strokeStyle=`rgba(201,169,110,${connAlpha})`;ctx2.lineWidth=.3+energyAmp*.4;ctx2.stroke()}});
+  const coreSize=8+energyAmp*12+Math.sin(pulseTime*2)*2*energyAmp;const coreGrad=ctx2.createRadialGradient(vCX,vCY,0,vCX,vCY,coreSize*3);coreGrad.addColorStop(0,`rgba(255,220,150,${0.3+energyAmp*0.5})`);coreGrad.addColorStop(0.4,`rgba(201,169,110,${0.15+energyAmp*0.3})`);coreGrad.addColorStop(1,'rgba(201,169,110,0)');ctx2.fillStyle=coreGrad;ctx2.beginPath();ctx2.arc(vCX,vCY,coreSize*3,0,Math.PI*2);ctx2.fill();ctx2.beginPath();ctx2.arc(vCX,vCY,coreSize,0,Math.PI*2);ctx2.fillStyle=`rgba(255,235,180,${0.5+energyAmp*0.4})`;ctx2.fill();
+  const BARS=64;for(let i=0;i<BARS;i++){const a=(i/BARS)*Math.PI*2+pulseTime*0.05;const wave=Math.abs(Math.sin(i*0.35+pulseTime*1.8)*Math.sin(i*0.7+pulseTime*0.9));const barH=(6+wave*60)*energyAmp;const innerR=minDim*0.05+coreSize;const outerR=innerR+barH;const hue=28+i*1.2;const barAlpha=0.3+wave*0.6*energyAmp;ctx2.beginPath();ctx2.moveTo(vCX+Math.cos(a)*innerR,vCY+Math.sin(a)*innerR);ctx2.lineTo(vCX+Math.cos(a)*outerR,vCY+Math.sin(a)*outerR);ctx2.strokeStyle=`hsla(${hue},70%,55%,${barAlpha})`;ctx2.lineWidth=2;ctx2.lineCap='round';ctx2.stroke()}
+  PARTS.forEach((p,idx)=>{p.life++;if(p.orbit){p.orbitA+=p.orbitS*(0.3+energyAmp*1.5);p.x=vCX+Math.cos(p.orbitA)*p.orbitR;p.y=vCY+Math.sin(p.orbitA)*p.orbitR}else{p.x+=p.vx*(0.2+energyAmp*.8);p.y+=p.vy*(0.2+energyAmp*.8)}const lifeRatio=p.life/p.maxLife;const alpha=p.alpha*Math.sin(lifeRatio*Math.PI)*(0.2+energyAmp*0.7);if(p.life>p.maxLife||p.x<-50||p.x>vW+50||p.y<-50||p.y>vH+50)PARTS[idx]=mkPart();ctx2.beginPath();ctx2.arc(p.x,p.y,p.size*(0.5+energyAmp*.5),0,Math.PI*2);ctx2.fillStyle=`hsla(${p.hue},60%,70%,${alpha})`;ctx2.fill()});
+  if(energyAmp>0.5){const r0=RINGS[0],r2=RINGS[2];const phA=ringPhase*r0.speed*200+r0.phase,phB=ringPhase*r2.speed*200+r2.phase;for(let i=0;i<4;i++){const a1=phA+(i/4)*Math.PI*2,a2=phB+(i/4)*Math.PI*2+0.5;const x1=vCX+Math.cos(a1)*minDim*r0.r,y1=vCY+Math.sin(a1)*minDim*r0.r;const x2=vCX+Math.cos(a2)*minDim*r2.r,y2=vCY+Math.sin(a2)*minDim*r2.r;ctx2.beginPath();ctx2.moveTo(x1,y1);ctx2.lineTo(x2,y2);ctx2.strokeStyle=`rgba(180,120,60,${0.08*(energyAmp-.5)*2})`;ctx2.lineWidth=.5;ctx2.stroke()}}
 }
 
 window.addEventListener('resize',initVis);
 
 // ══ MUSIC PLAYER ══
-function renderList(){const list=document.getElementById('tlist');document.getElementById('tempty').style.display=tracks.length?'none':'block';list.querySelectorAll('.ti').forEach(el=>el.remove());tracks.forEach((tr,idx)=>{const el=document.createElement('div');el.className='ti'+(idx===curIdx?' playing':'');el.dataset.idx=idx;el.draggable=true;const thumb=tr.thumb?`<img class="tthumb" src="${tr.thumb}" onerror="this.style.display='none'">`:`<div class="tph">♫</div>`;const ind=idx===curIdx&&isPlaying?`<div class="pbars"><div class="pbar"></div><div class="pbar"></div><div class="pbar"></div></div>`:`<span class="tnum">${idx+1}</span>`;el.innerHTML=`<input type="checkbox" class="tcb" ${tr.sel?'checked':''} onclick="toggleSel(event,${idx})"><div class="tdrag">⋮⋮</div>${thumb}<div class="tinfo"><div class="tname">${eH(tr.title||tr.url)}</div><div class="tauth">${eH(tr.author||'SoundCloud')}</div><span class="ttype">${tr.isPl?'Альбом':'Трек'}</span></div>${ind}<button class="tdel" onclick="removeTrack(event,${idx})">✕</button>`;el.addEventListener('click',e=>{if(e.target.closest('.tcb')||e.target.closest('.tdel')||e.target.closest('.tdrag'))return;playAt(idx)});el.addEventListener('dragstart',e=>{dragTI=idx;e.dataTransfer.effectAllowed='move'});el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('dover')});el.addEventListener('dragleave',()=>el.classList.remove('dover'));el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('dover');if(dragTI===null||dragTI===idx)return;const m=tracks.splice(dragTI,1)[0];tracks.splice(idx,0,m);if(curIdx===dragTI)curIdx=idx;else if(curIdx>dragTI&&curIdx<=idx)curIdx--;else if(curIdx<dragTI&&curIdx>=idx)curIdx++;dragTI=null;saveAll();renderList()});el.addEventListener('dragend',()=>{dragTI=null});list.appendChild(el)})}
+function renderList(){
+  const list=document.getElementById('tlist');
+  document.getElementById('tempty').style.display=tracks.length?'none':'block';
+  list.querySelectorAll('.ti').forEach(el=>el.remove());
+  tracks.forEach((tr,idx)=>{
+    const el=document.createElement('div');
+    el.className='ti'+(idx===curIdx?' playing':'');
+    el.dataset.idx=idx;el.draggable=true;
+    const thumb=tr.thumb?`<img class="tthumb" src="${tr.thumb}" onerror="this.style.display='none'">`:`<div class="tph">♫</div>`;
+    const ind=idx===curIdx&&isPlaying?`<div class="pbars"><div class="pbar"></div><div class="pbar"></div><div class="pbar"></div></div>`:`<span class="tnum">${idx+1}</span>`;
+    el.innerHTML=`<input type="checkbox" class="tcb" ${tr.sel?'checked':''} onclick="toggleSel(event,${idx})"><div class="tdrag">⋮⋮</div>${thumb}<div class="tinfo"><div class="tname">${eH(tr.title||tr.url)}</div><div class="tauth">${eH(tr.author||'SoundCloud')}</div><span class="ttype">${tr.isPl?'Альбом':'Трек'}</span></div>${ind}<button class="tdel" onclick="removeTrack(event,${idx})">✕</button>`;
+    el.addEventListener('click',e=>{if(e.target.closest('.tcb')||e.target.closest('.tdel')||e.target.closest('.tdrag'))return;playAt(idx)});
+    el.addEventListener('dragstart',e=>{dragTI=idx;e.dataTransfer.effectAllowed='move'});
+    el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('dover')});
+    el.addEventListener('dragleave',()=>el.classList.remove('dover'));
+    el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('dover');if(dragTI===null||dragTI===idx)return;const m=tracks.splice(dragTI,1)[0];tracks.splice(idx,0,m);if(curIdx===dragTI)curIdx=idx;else if(curIdx>dragTI&&curIdx<=idx)curIdx--;else if(curIdx<dragTI&&curIdx>=idx)curIdx++;dragTI=null;saveAll();renderList()});
+    el.addEventListener('dragend',()=>{dragTI=null});
+    list.appendChild(el);
+  });
+}
+
 function toggleSel(e,idx){e.stopPropagation();tracks[idx].sel=!tracks[idx].sel;saveAll();renderList()}
 function removeTrack(e,idx){e.stopPropagation();tracks.splice(idx,1);if(curIdx>=tracks.length)curIdx=tracks.length-1;saveAll();renderList()}
 
-async function addUrl(){const inp=document.getElementById('urlIn');const url=inp.value.trim();if(!url||!url.includes('soundcloud.com')){inp.style.borderColor='#904040';setTimeout(()=>inp.style.borderColor='',1200);return}inp.value='';showToast('Загружаем...');try{const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);const d=await r.json();tracks.push({id:String(tIdC++),url,title:d.title,author:d.author_name,thumb:d.thumbnail_url,sel:false,isPl:url.includes('/sets/')})}catch{tracks.push({id:String(tIdC++),url,title:url,author:'SoundCloud',thumb:null,sel:false,isPl:url.includes('/sets/')})}saveAll();renderList();if(curIdx<0&&tracks.length===1)playAt(0);hideToast()}
+async function addUrl(){
+  const inp=document.getElementById('urlIn');
+  const url=inp.value.trim();
+  if(!url||!url.includes('soundcloud.com')){inp.style.borderColor='#904040';setTimeout(()=>inp.style.borderColor='',1200);return}
+  inp.value='';showToast('Загружаем...');
+  try{const r=await fetch(`https://soundcloud.com/oembed?url=${encodeURIComponent(url)}&format=json`);const d=await r.json();tracks.push({id:String(tIdC++),url,title:d.title,author:d.author_name,thumb:d.thumbnail_url,sel:false,isPl:url.includes('/sets/')})}
+  catch{tracks.push({id:String(tIdC++),url,title:url,author:'SoundCloud',thumb:null,sel:false,isPl:url.includes('/sets/')})}
+  saveAll();renderList();
+  if(curIdx<0&&tracks.length===1)playAt(0);
+  hideToast();
+}
 
-// ══ AUDIOCONTEXT KEEPALIVE — не даёт браузеру заморозить вкладку ══
+// FIX 3: Play random track
+function playRandom(){
+  if(!tracks.length)return;
+  const idx=Math.floor(Math.random()*tracks.length);
+  playAt(idx);
+}
+
+// ══ AUDIOCONTEXT KEEPALIVE ══
 let audioCtx=null,gainNode=null,keepAliveNode=null;
 function startAudioKeepAlive(){
   try{
     if(audioCtx&&audioCtx.state!=='closed')return;
     audioCtx=new(window.AudioContext||window.webkitAudioContext)();
     gainNode=audioCtx.createGain();
-    gainNode.gain.value=0.00001; // абсолютно тихо
-    // Oscillator с нулевой громкостью — держит AudioContext живым
+    gainNode.gain.value=0.00001;
     const osc=audioCtx.createOscillator();
     osc.frequency.value=1;
     osc.connect(gainNode);
@@ -731,41 +625,65 @@ function resumeAudioCtx(){
   try{if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();}catch(e){}
 }
 
-// ══ WEB WORKER TIMER — не подвержен браузерному throttling ══
-// Worker работает в отдельном потоке и не замораживается
-let workerTimer=null;
+// ══ FIX 2: RELIABLE BACKGROUND TRACK SWITCHING ══
+// Strategy: track start time + track duration in JS, use setInterval + Page Visibility fallback
+// This works even when tab is hidden because we track wall-clock time
+
+let trackStartWallTime=0;   // Date.now() when track started
+let trackDuration=0;        // ms, total duration from SC widget
+let bgSwitchTimer=null;     // setInterval for background checking
+let bgSwitchScheduled=false;
+
+function scheduleBgSwitch(durationMs, currentPosMs){
+  clearBgSwitch();
+  if(durationMs<=0)return;
+  const remaining=durationMs-currentPosMs-1200; // 1.2s before end
+  if(remaining<=0){onFinish();return}
+  trackStartWallTime=Date.now()-currentPosMs;
+  trackDuration=durationMs;
+  bgSwitchScheduled=true;
+
+  // Check every 2 seconds using setInterval (survives hidden tabs better than setTimeout chains)
+  bgSwitchTimer=setInterval(()=>{
+    if(!isPlaying||!bgSwitchScheduled)return;
+    const elapsed=Date.now()-trackStartWallTime;
+    if(elapsed>=trackDuration-1200){
+      clearBgSwitch();
+      if(!switchingTrack){switchingTrack=true;stopPoll();onFinish()}
+    }
+  },2000);
+}
+
+function clearBgSwitch(){
+  if(bgSwitchTimer){clearInterval(bgSwitchTimer);bgSwitchTimer=null}
+  bgSwitchScheduled=false;
+}
+
+// ══ WEB WORKER TIMER ══
+let pollTimer2=null;
 const WORKER_CODE=`
 let iv=null;
 self.onmessage=function(e){
-  if(e.data==='start'){
-    if(iv)clearInterval(iv);
-    iv=setInterval(()=>self.postMessage('tick'),600);
-  } else if(e.data==='stop'){
-    if(iv){clearInterval(iv);iv=null;}
-  }
+  if(e.data==='start'){if(iv)clearInterval(iv);iv=setInterval(()=>self.postMessage('tick'),600);}
+  else if(e.data==='stop'){if(iv){clearInterval(iv);iv=null;}}
 };
 `;
-let workerBlob,workerURL,timerWorker;
+let timerWorker=null;
 try{
-  workerBlob=new Blob([WORKER_CODE],{type:'application/javascript'});
-  workerURL=URL.createObjectURL(workerBlob);
-  timerWorker=new Worker(workerURL);
+  const blob=new Blob([WORKER_CODE],{type:'application/javascript'});
+  timerWorker=new Worker(URL.createObjectURL(blob));
   timerWorker.onmessage=()=>workerTick();
-}catch(e){timerWorker=null;}
+}catch(e){}
 
 function startPoll(){
   stopPoll();
   lastPos=0;stuckCount=0;switchingTrack=false;
-  if(timerWorker){
-    timerWorker.postMessage('start');
-  } else {
-    // Fallback если Worker недоступен
-    pollTimer=setInterval(()=>workerTick(),600);
-  }
+  if(timerWorker)timerWorker.postMessage('start');
+  else pollTimer=setInterval(()=>workerTick(),600);
 }
 function stopPoll(){
   if(timerWorker)timerWorker.postMessage('stop');
-  if(pollTimer){clearInterval(pollTimer);pollTimer=null;}
+  if(pollTimer){clearInterval(pollTimer);pollTimer=null}
 }
 
 function workerTick(){
@@ -774,23 +692,33 @@ function workerTick(){
   widget.getPosition(pos=>{
     widget.getDuration(dur=>{
       if(!dur||dur<=0)return;
+
+      // FIX 2: Update wall-clock schedule whenever we get fresh position
+      if(dur>0&&bgSwitchScheduled){
+        trackStartWallTime=Date.now()-pos;
+        trackDuration=dur;
+      }else if(dur>0&&!bgSwitchScheduled&&isPlaying){
+        scheduleBgSwitch(dur,pos);
+      }
+
       const pct=(pos/dur)*100;
       document.getElementById('pin').style.width=pct+'%';
       document.getElementById('pthumb').style.left=pct+'%';
       document.getElementById('tC').textContent=fmtT(pos);
       document.getElementById('tD').textContent=fmtT(dur);
-      // Конец трека — за 1.5 сек до конца
+
+      // Near-end detection (visible tab fallback)
       if(dur>5000&&pos>=dur-1500&&pos>0){
-        switchingTrack=true;stopPoll();
+        switchingTrack=true;stopPoll();clearBgSwitch();
         setTimeout(()=>onFinish(),1200);
         return;
       }
-      // Застревание: позиция не меняется при воспроизведении
+      // Stuck detection
       if(isPlaying){
         if(Math.abs(pos-lastPos)<80)stuckCount++;
         else stuckCount=0;
         if(stuckCount>=12&&dur>0&&pos>=dur-6000){
-          stuckCount=0;switchingTrack=true;stopPoll();
+          stuckCount=0;switchingTrack=true;stopPoll();clearBgSwitch();
           setTimeout(()=>onFinish(),500);
         }
       }else stuckCount=0;
@@ -802,21 +730,33 @@ function workerTick(){
 // ══ SC WIDGET ══
 function initWidget(url){
   const iframe=document.getElementById('sc-iframe');
-  stopPoll();wReady=false;widget=null;switchingTrack=false;
+  stopPoll();clearBgSwitch();wReady=false;widget=null;switchingTrack=false;
   iframe.src='https://w.soundcloud.com/player/?url='+encodeURIComponent(url)+'&color=%23c9a96e&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_teaser=false&visual=false';
   iframe.onload=()=>{setTimeout(()=>{
     try{
       widget=SC.Widget(iframe);
       widget.bind(SC.Widget.Events.READY,()=>{
         wReady=true;
-        widget.setVolume(parseInt(document.getElementById('vol').value));
+        // FIX 1: Always apply saved volume on widget ready
+        widget.setVolume(savedVolume);
         widget.getCurrentSound(s=>{if(s)updateNP(s)});
+        // After ready, get duration and schedule bg switch
+        setTimeout(()=>{
+          if(!widget||!wReady)return;
+          widget.getDuration(dur=>{
+            widget.getPosition(pos=>{
+              if(dur>0)scheduleBgSwitch(dur,pos||0);
+            });
+          });
+        },800);
         startPoll();
       });
       widget.bind(SC.Widget.Events.PLAY,()=>{
         isPlaying=true;visPlaying=true;
         startAudioKeepAlive();
         document.getElementById('ppBtn').textContent='⏸';
+        // FIX 1: Re-apply volume on every play event (catches auto-play on new track)
+        if(widget&&wReady)widget.setVolume(savedVolume);
         renderList();
       });
       widget.bind(SC.Widget.Events.PAUSE,()=>{
@@ -826,10 +766,10 @@ function initWidget(url){
         renderList();
       });
       widget.bind(SC.Widget.Events.FINISH,()=>{
-        if(!switchingTrack){switchingTrack=true;stopPoll();onFinish()}
+        if(!switchingTrack){switchingTrack=true;stopPoll();clearBgSwitch();onFinish()}
       });
       widget.bind(SC.Widget.Events.ERROR,()=>{
-        if(!switchingTrack){switchingTrack=true;stopPoll();setTimeout(()=>onFinish(),600)}
+        if(!switchingTrack){switchingTrack=true;stopPoll();clearBgSwitch();setTimeout(()=>onFinish(),600)}
       });
     }catch(err){}
   },400)};
@@ -845,7 +785,7 @@ function updateNP(s){
 }
 
 function onFinish(){
-  if(playMode==='single'){switchingTrack=false;if(widget&&wReady){widget.seekTo(0);widget.play();startPoll()}return}
+  if(playMode==='single'){switchingTrack=false;if(widget&&wReady){widget.seekTo(0);widget.play();startPoll();scheduleBgSwitch(trackDuration,0)}return}
   playNext();
 }
 
@@ -854,6 +794,7 @@ function getQ(){return playMode==='selected'?tracks.map((t,i)=>({t,i})).filter(x
 function playAt(idx){
   curIdx=idx;saveAll();renderList();
   const tr=tracks[idx];if(!tr)return;
+  clearBgSwitch();
   initWidget(tr.url);
   document.getElementById('ppBtn').textContent='⏸';
   isPlaying=true;visPlaying=true;
@@ -867,12 +808,51 @@ function playAt(idx){
   updateTitle();
 }
 
-function playNext(){const q=getQ();if(!q.length){switchingTrack=false;return}if(playMode==='shuffle'){const o=q.filter(x=>x.i!==curIdx);playAt((o.length?o[Math.floor(Math.random()*o.length)]:q[0]).i)}else{const cur=q.findIndex(x=>x.i===curIdx);playAt(q[(cur+1)%q.length].i)}}
-function playPrev(){const q=getQ();if(!q.length)return;const cur=q.findIndex(x=>x.i===curIdx);playAt(q[(cur-1+q.length)%q.length].i)}
-function togglePP(){if(curIdx<0&&tracks.length>0){playAt(0);return}if(!widget||!wReady)return;if(isPlaying){widget.pause()}else{widget.play()}}
-function setVol(v){document.getElementById('volPct').textContent=v+'%';if(widget&&wReady)widget.setVolume(parseInt(v))}
-function seekTo(e){if(!widget||!wReady)return;const r=document.getElementById('pout').getBoundingClientRect();const pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));widget.getDuration(dur=>{widget.seekTo(Math.floor(pct*dur));document.getElementById('pin').style.width=(pct*100)+'%';document.getElementById('pthumb').style.left=(pct*100)+'%'})}
-function setMode(m){playMode=m;document.querySelectorAll('.mbtn').forEach(b=>b.classList.toggle('act',b.dataset.m===m));saveAll()}
+function playNext(){
+  const q=getQ();
+  if(!q.length){switchingTrack=false;return}
+  if(playMode==='shuffle'){
+    const o=q.filter(x=>x.i!==curIdx);
+    playAt((o.length?o[Math.floor(Math.random()*o.length)]:q[0]).i);
+  }else{
+    const cur=q.findIndex(x=>x.i===curIdx);
+    playAt(q[(cur+1)%q.length].i);
+  }
+}
+function playPrev(){
+  const q=getQ();if(!q.length)return;
+  const cur=q.findIndex(x=>x.i===curIdx);
+  playAt(q[(cur-1+q.length)%q.length].i);
+}
+function togglePP(){
+  if(curIdx<0&&tracks.length>0){playAt(0);return}
+  if(!widget||!wReady)return;
+  if(isPlaying){widget.pause()}else{widget.play()}
+}
+
+// FIX 1: setVol saves to localStorage and always applies to widget
+function setVol(v){
+  savedVolume=parseInt(v);
+  document.getElementById('volPct').textContent=v+'%';
+  localStorage.setItem('m_volume',savedVolume);
+  if(widget&&wReady)widget.setVolume(savedVolume);
+}
+
+function seekTo(e){
+  if(!widget||!wReady)return;
+  const r=document.getElementById('pout').getBoundingClientRect();
+  const pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+  widget.getDuration(dur=>{
+    const seekPos=Math.floor(pct*dur);
+    widget.seekTo(seekPos);
+    document.getElementById('pin').style.width=(pct*100)+'%';
+    document.getElementById('pthumb').style.left=(pct*100)+'%';
+    // FIX 2: Reschedule bg switch after seek
+    scheduleBgSwitch(dur,seekPos);
+  });
+}
+
+function setMode(m){playMode=m;document.querySelectorAll('.mbtn[data-m]').forEach(b=>b.classList.toggle('act',b.dataset.m===m));saveAll()}
 function fmtT(ms){const s=Math.floor(ms/1000);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
 
 // ══ VISIBILITY — возврат на вкладку ══
@@ -880,6 +860,7 @@ document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState==='visible'){
     resumeAudioCtx();
     if(isPlaying&&widget&&wReady){
+      // Check if bg timer already triggered a switch while hidden
       setTimeout(()=>{
         if(!widget||!wReady)return;
         widget.isPaused(paused=>{if(paused&&isPlaying)widget.play();});
@@ -902,18 +883,22 @@ bApply();
 renderKanban();
 renderBoard();
 renderList();
-document.querySelectorAll('.mbtn').forEach(b=>b.classList.toggle('act',b.dataset.m===playMode));
+
+// FIX 1: Apply saved volume to slider UI on load
+(function(){
+  const volEl=document.getElementById('vol');
+  volEl.value=savedVolume;
+  document.getElementById('volPct').textContent=savedVolume+'%';
+})();
+
+document.querySelectorAll('.mbtn[data-m]').forEach(b=>b.classList.toggle('act',b.dataset.m===playMode));
 if(curIdx>=0&&tracks[curIdx]){
   const tr=tracks[curIdx];
   document.getElementById('npT').textContent=tr.title||'—';
   document.getElementById('npA').textContent=tr.author||'';
 }
 
-// Init visualizer after layout
-requestAnimationFrame(()=>{
-  initVis();
-  drawVis();
-});
+requestAnimationFrame(()=>{initVis();drawVis()});
 </script>
 </body>
 </html>
